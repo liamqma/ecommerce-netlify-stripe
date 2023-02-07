@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.section-template--15459810312360__1643657004d9161eca-padding {
+  padding-top: 63px;
+  padding-bottom: 63px;
+}
+
+@media screen and (min-width: 750px) {
+  .section-template--15459810312360__1643657004d9161eca-padding {
+    padding-top: 84px;
+    padding-bottom: 84px;
+  }
+}
