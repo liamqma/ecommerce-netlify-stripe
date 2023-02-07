@@ -31,7 +31,7 @@ function SectionCollections() {
                                         </div><div className="card__content">
                                                 <div className="card__information">
                                                     <h3 className="card__heading">
-                                                        <a href="/collections/rachel-crummey" className="full-unstyled-link">Rachel Crummey
+                                                        <a href="/collections/collection-1" className="full-unstyled-link">Rachel Crummey
                                                         </a>
                                                     </h3><p className="card__caption">Rachel Crummey is a visual artist and writer of settler descent based...<span className="icon-wrap">&nbsp;<svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
                                                         <path fillRule="evenodd" clipRule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
@@ -44,7 +44,7 @@ function SectionCollections() {
                                         <div className="card__content">
                                             <div className="card__information">
                                                 <h3 className="card__heading">
-                                                    <a href="/collections/rachel-crummey" className="full-unstyled-link">Rachel Crummey<span className="icon-wrap"><svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+                                                    <a href="/collections/collection-1" className="full-unstyled-link">Rachel Crummey<span className="icon-wrap"><svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
                                                         <path fillRule="evenodd" clipRule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
                                                         </path></svg>
                                                     </span>
@@ -74,7 +74,7 @@ function SectionCollections() {
                                             </div><div className="card__content">
                                                     <div className="card__information">
                                                         <h3 className="card__heading">
-                                                            <a href="/collections/leia-bryans" className="full-unstyled-link">Leia Bryans
+                                                            <a href="/collections/collection-1" className="full-unstyled-link">Leia Bryans
                                                             </a>
                                                         </h3><p className="card__caption">Leia Bryans (b. 1992) is a self-taught artist working with painting,&nbsp;drawing, and...<span className="icon-wrap">&nbsp;<svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
                                                             <path fillRule="evenodd" clipRule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
@@ -87,7 +87,7 @@ function SectionCollections() {
                                             <div className="card__content">
                                                 <div className="card__information">
                                                     <h3 className="card__heading">
-                                                        <a href="/collections/leia-bryans" className="full-unstyled-link">Leia Bryans<span className="icon-wrap"><svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+                                                        <a href="/collections/collection-1" className="full-unstyled-link">Leia Bryans<span className="icon-wrap"><svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
                                                             <path fillRule="evenodd" clipRule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
                                                             </path></svg>
                                                         </span>
@@ -117,7 +117,7 @@ function SectionCollections() {
                                             </div><div className="card__content">
                                                     <div className="card__information">
                                                         <h3 className="card__heading">
-                                                            <a href="/collections/melanie-keay" className="full-unstyled-link">Melanie Keay<span className="icon-wrap"><svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+                                                            <a href="/collections/collection-1" className="full-unstyled-link">Melanie Keay<span className="icon-wrap"><svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
                                                                 <path fillRule="evenodd" clipRule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
                                                                 </path></svg>
                                                             </span>
@@ -129,7 +129,7 @@ function SectionCollections() {
                                             <div className="card__content">
                                                 <div className="card__information">
                                                     <h3 className="card__heading">
-                                                        <a href="/collections/melanie-keay" className="full-unstyled-link">Melanie Keay<span className="icon-wrap"><svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+                                                        <a href="/collections/collection-1" className="full-unstyled-link">Melanie Keay<span className="icon-wrap"><svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
                                                             <path fillRule="evenodd" clipRule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
                                                             </path></svg>
                                                         </span>
@@ -159,7 +159,7 @@ function SectionCollections() {
                                             </div><div className="card__content">
                                                     <div className="card__information">
                                                         <h3 className="card__heading">
-                                                            <a href="/collections/sid-hicks" className="full-unstyled-link">Sid Hicks
+                                                            <a href="/collections/collection-1" className="full-unstyled-link">Sid Hicks
                                                             </a>
                                                         </h3><p className="card__caption">Sid Hicks is a multidisciplinary artist living and working in the London,...<span className="icon-wrap">&nbsp;<svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
                                                             <path fillRule="evenodd" clipRule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
@@ -172,7 +172,7 @@ function SectionCollections() {
                                             <div className="card__content">
                                                 <div className="card__information">
                                                     <h3 className="card__heading">
-                                                        <a href="/collections/sid-hicks" className="full-unstyled-link">Sid Hicks<span className="icon-wrap"><svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+                                                        <a href="/collections/collection-1" className="full-unstyled-link">Sid Hicks<span className="icon-wrap"><svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
                                                             <path fillRule="evenodd" clipRule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
                                                             </path></svg>
                                                         </span>

@@ -2,15 +2,42 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './theme.css';
 import './index.css';
-import App from './App';
+import Home from './pages/home';
+import Products from './pages/products';
+import Product from './pages/product';
+import AnnouncementBar from './announcement-bar';
+import Header from './header';
+import Footer from './footer';
 import reportWebVitals from './reportWebVitals';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/collections/collection-1",
+    element: <Products />,
+  },
+  {
+    path: "/products/product-1",
+    element: <Product />,
+  },
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <AnnouncementBar />
+    <Header />
+    <RouterProvider router={router} />
+    <Footer />
   </React.StrictMode>
 );
 
