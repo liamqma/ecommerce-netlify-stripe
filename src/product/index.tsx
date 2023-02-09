@@ -1,5 +1,3 @@
-import React, { useState, DOMAttributes } from 'react';
-
 import "./index.css"
 
 declare global {
@@ -91,7 +89,7 @@ function Product() {
                                         </span>
                                         <div className="loading-overlay__spinner hidden">
                                             <svg aria-hidden="true" focusable="false" role="presentation" className="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                                                <circle className="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                                <circle className="path" fill="none" strokeWidth="6" cx="33" cy="33" r="30"></circle>
                                             </svg>
                                         </div>
                                     </button>
@@ -124,7 +122,7 @@ function Product() {
                                         </span></div>
                                 </div>
                                 <div>
-                                    <form method="post" action="/cart/add" id="product-form-installment" accept-charset="UTF-8" className="installment caption-large" >
+                                    <form method="post" action="/cart/add" id="product-form-installment" acceptCharset="UTF-8" className="installment caption-large" >
                                         <input type="hidden" name="form_type" value="product" />
                                         <input type="hidden" name="utf8" value="✓" />
                                         <input type="hidden" name="id" value="42007872536744" />
@@ -134,7 +132,7 @@ function Product() {
                                 </div>
 
                                 <div className="product__description rte">
-                                    <p><i><span style={{ fontWeight: 400 }}>This is a demonstration store. You can purchase products like this from </span></i><a href="https://nintheditions.com/" target="_blank"><i><span style={{ fontWeight: 400 }}>Ninth Editions</span></i></a><i><span style={{ fontWeight: 400 }}>.</span></i></p>
+                                    <p><i><span style={{ fontWeight: 400 }}>This is a demonstration store. You can purchase products like this from </span></i><a rel="noreferrer" href="https://nintheditions.com/" target="_blank"><i><span style={{ fontWeight: 400 }}>Ninth Editions</span></i></a><i><span style={{ fontWeight: 400 }}>.</span></i></p>
                                     <p><strong>Details</strong><br /><strong></strong></p>
                                     <ul>
                                         <li><span data-mce-fragment="1">Original artwork, 2021</span></li>
