@@ -110,8 +110,8 @@ function SectionHeader() {
                             </svg>
                             <span className="visually-hidden">Cart</span>
                             <div className="cart-count-bubble">
-                                <span aria-hidden="true">1</span>
-                                <span className="visually-hidden">1 item</span>
+                                <span aria-hidden="true">2</span>
+                                <span className="visually-hidden">2 item</span>
                             </div>
                         </a>
                     </div>
