@@ -5,6 +5,7 @@ import './index.css';
 import Home from './pages/home';
 import Products from './pages/products';
 import Product from './pages/product';
+import NotFound from './pages/not-found';
 import AnnouncementBar from './announcement-bar';
 import Header from './header';
 import Footer from './footer';
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
     path: "/products/product-1",
     element: <Product />,
   },
+  {
+    path: "/*",
+    element: <NotFound />
+  }
 ]);
 
 const root = ReactDOM.createRoot(
