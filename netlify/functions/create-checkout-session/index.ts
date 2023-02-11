@@ -19,14 +19,9 @@ export const handler: Handler = async (event, context) => {
       },
     ],
     mode: 'payment',
-    success_url: `${URL}?success=true`,
-    cancel_url: `${URL}?canceled=true`,
+    success_url: `${URL}/thank-you?success=true`,
+    cancel_url: `${URL}/cart?canceled=true`,
     shipping_address_collection: { allowed_countries: ['AU'] },
-    shipping_options: [
-      {
-        shipping_rate: 'shr_1Ma4w7Bx9e7RzSyHktl5Z9Vv',
-      },
-    ],
   });
 
   return {

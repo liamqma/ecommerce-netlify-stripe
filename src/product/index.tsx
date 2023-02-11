@@ -1,4 +1,5 @@
 import "./index.css"
+import { useCart } from "../hooks/cart";
 
 declare global {
     namespace JSX {
@@ -12,6 +13,12 @@ declare global {
 }
 
 function Product() {
+    const [, { addItem }] = useCart();
+
+    const addItemToCart = () => {
+        addItem(["price_1MZtglBx9e7RzSyHvkmq5o0M", "price_1MXMkEBx9e7RzSyHf1WhESI3"][Math.floor(Math.random() * 2)])
+    }
+
     return (
         <>
             <section id="shopify-section-template--15459810574504__main" className="shopify-section section">
@@ -84,9 +91,8 @@ function Product() {
                                 </h1>
                                 <p className="product__text subtitle">Product subtitle</p>
                                 <div className="product-form__buttons">
-                                    <button type="submit" name="add" className="product-form__submit button button--full-width button--secondary">
-                                        <span>Add to cart
-                                        </span>
+                                    <button onClick={addItemToCart} type="submit" name="add" className="product-form__submit button button--full-width button--secondary">
+                                        <span>Add to cart</span>
                                         <div className="loading-overlay__spinner hidden">
                                             <svg aria-hidden="true" focusable="false" role="presentation" className="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                                                 <circle className="path" fill="none" strokeWidth="6" cx="33" cy="33" r="30"></circle>
