@@ -1,5 +1,6 @@
 import { useState } from "react";
 import classNames from "classnames";
+import { Link } from "react-router-dom";
 
 import "./index.css"
 import logo from "./logo.png"
@@ -72,9 +73,9 @@ function SectionHeader() {
                         </details>
                     </div>
                     <h1 className="header__heading">
-                        <a href="/" className="header__heading-link link link--text focus-inset">
+                        <Link to="/" className="header__heading-link link link--text focus-inset">
                             <img src={logo} loading="lazy" className="header__heading-logo" alt="MYSA & CO." />
-                        </a>
+                        </Link>
                     </h1>
                     <nav className="header__inline-menu">
                         <ul className="list-menu list-menu--inline">

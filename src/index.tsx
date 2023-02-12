@@ -14,29 +14,44 @@ import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   RouterProvider,
+  Outlet,
 } from "react-router-dom";
+
+const Layout = () =>
+  <>
+    <AnnouncementBar />
+    <Header />
+    <Outlet />
+    <Footer />
+  </>
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Layout />,
+    children: [
+      {
+        element: <Home />,
+        index: true
+      },
+      {
+        path: "/collections/collection-1",
+        element: <Products />,
+      },
+      {
+        path: "/products/product-1",
+        element: <Product />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/*",
+        element: <NotFound />
+      }
+    ]
   },
-  {
-    path: "/collections/collection-1",
-    element: <Products />,
-  },
-  {
-    path: "/products/product-1",
-    element: <Product />,
-  },
-  {
-    path: "/cart",
-    element: <Cart />,
-  },
-  {
-    path: "/*",
-    element: <NotFound />
-  }
 ]);
 
 const root = ReactDOM.createRoot(
@@ -44,10 +59,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <AnnouncementBar />
-    <Header />
     <RouterProvider router={router} />
-    <Footer />
   </React.StrictMode>
 );
 
