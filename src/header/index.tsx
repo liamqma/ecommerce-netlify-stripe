@@ -3,7 +3,6 @@ import classNames from "classnames";
 import { Link } from "react-router-dom";
 
 import "./index.css"
-import logo from "./logo.png"
 import { useCart } from "../hooks/cart";
 
 function SectionHeader() {
@@ -74,7 +73,7 @@ function SectionHeader() {
                     </div>
                     <h1 className="header__heading">
                         <Link to="/" className="header__heading-link link link--text focus-inset">
-                            <img src={logo} loading="lazy" className="header__heading-logo" alt="MYSA & CO." />
+                            MYSA & CO.
                         </Link>
                     </h1>
                     <nav className="header__inline-menu">

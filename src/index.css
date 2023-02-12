@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'RocaOne-Th';
+  src: url('./fonts/RocaOne-Th.woff2') format('woff2'),
+    url('./fonts/RocaOne-Th.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root,
 .color-background-1 {
   --color-foreground: var(--color-base-text);
