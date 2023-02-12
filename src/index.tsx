@@ -50,7 +50,7 @@ const router = createBrowserRouter([
         element: <Products />,
       },
       {
-        path: "/products/product-1",
+        path: "/products/:id",
         element: <Product />,
       },
       {

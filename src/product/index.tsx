@@ -1,4 +1,7 @@
+import { useParams } from 'react-router-dom';
+
 import "./index.css"
+import productsData from "../data/products";
 import { useCart } from "../hooks/cart";
 
 declare global {
@@ -14,6 +17,10 @@ declare global {
 
 function Product() {
     const [, { addItem }] = useCart();
+    const { id } = useParams();
+
+    const product = productsData.find(p => p.id === id);
+    if (!product) throw new Error("Product not found");
 
     const addItemToCart = () => {
         addItem(["price_1MZtglBx9e7RzSyHvkmq5o0M", "price_1MXMkEBx9e7RzSyHf1WhESI3"][Math.floor(Math.random() * 2)])
@@ -85,30 +92,31 @@ function Product() {
                             </media-gallery>
                         </div>
                         <div className="product__info-wrapper grid__item">
-                            <div id="ProductInfo-template--15459810574504__main" className="product__info-container product__info-container--sticky"><p className="product__text caption-with-letter-spacing"></p>
+                            <div id="ProductInfo-template--15459810574504__main" className="product__info-container product__info-container--sticky">
                                 <h1 className="product__title">
                                     seven vessels 2
                                 </h1>
-                                <p className="product__text subtitle">Product subtitle</p>
-                                <div className="product-form__buttons">
-                                    <button onClick={addItemToCart} type="submit" name="add" className="product-form__submit button button--full-width button--secondary">
-                                        <span>Add to cart</span>
-                                        <div className="loading-overlay__spinner hidden">
-                                            <svg aria-hidden="true" focusable="false" role="presentation" className="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                                                <circle className="path" fill="none" strokeWidth="6" cx="33" cy="33" r="30"></circle>
-                                            </svg>
-                                        </div>
-                                    </button>
-                                    <button type="button" className="shopify-payment-button__button shopify-payment-button__button--unbranded BUz42FHpSPncCPJ4Pr_f jjzYeefyWpPZLH9pIgyw RWJ0IfBjxIhflh4AIrUw">Buy it now</button>
-                                </div>
                                 <div className="no-js-hidden" id="price-template--15459810574504__main" role="status">
                                     <div className="price price--large price--show-badge">
                                         <div className="price__container"><div className="price__regular">
                                             <span className="visually-hidden visually-hidden--inline">Regular price</span>
                                             <span className="price-item price-item--regular">
-                                                $250.00 AUD
+                                                $600.00 AUD
                                             </span>
                                         </div>
+                                            <div className="price__sale">
+                                                <span className="visually-hidden visually-hidden--inline">Regular price</span>
+                                                <span>
+                                                    <s className="price-item price-item--regular">
+
+
+
+                                                    </s>
+                                                </span><span className="visually-hidden visually-hidden--inline">Sale price</span>
+                                                <span className="price-item price-item--sale price-item--last">
+                                                    $600.00 AUD
+                                                </span>
+                                            </div>
                                             <small className="unit-price caption hidden">
                                                 <span className="visually-hidden">Unit price</span>
                                                 <span className="price-item price-item--last">
@@ -127,6 +135,17 @@ function Product() {
                                             Sold out
                                         </span></div>
                                 </div>
+                                <div className="product-form__buttons">
+                                    <button onClick={addItemToCart} type="submit" name="add" className="product-form__submit button button--full-width button--secondary">
+                                        <span>Add to cart</span>
+                                        <div className="loading-overlay__spinner hidden">
+                                            <svg aria-hidden="true" focusable="false" role="presentation" className="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                                <circle className="path" fill="none" strokeWidth="6" cx="33" cy="33" r="30"></circle>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <button type="button" className="shopify-payment-button__button shopify-payment-button__button--unbranded BUz42FHpSPncCPJ4Pr_f jjzYeefyWpPZLH9pIgyw RWJ0IfBjxIhflh4AIrUw">Buy it now</button>
+                                </div>
                                 <div>
                                     <form method="post" action="/cart/add" id="product-form-installment" acceptCharset="UTF-8" className="installment caption-large" >
                                         <input type="hidden" name="form_type" value="product" />
@@ -134,32 +153,25 @@ function Product() {
                                         <input type="hidden" name="id" value="42007872536744" />
                                     </form>
                                 </div>
-                                <div>
-                                </div>
-
                                 <div className="product__description rte">
-                                    <p><i><span style={{ fontWeight: 400 }}>This is a demonstration store. You can purchase products like this from </span></i><a rel="noreferrer" href="https://nintheditions.com/" target="_blank"><i><span style={{ fontWeight: 400 }}>Ninth Editions</span></i></a><i><span style={{ fontWeight: 400 }}>.</span></i></p>
-                                    <p><strong>Details</strong><br /><strong></strong></p>
+                                    <p><strong>Details</strong></p>
                                     <ul>
-                                        <li><span data-mce-fragment="1">Original artwork, 2021</span></li>
+                                        <li>Original artwork, 2021</li>
                                         <li>Gouache&nbsp;on paper&nbsp;with deckled edge</li>
                                         <li>10&nbsp;x 12 inches</li>
                                         <li>Unframed&nbsp;</li>
                                     </ul>
                                     <p><strong>Suggested Framing</strong></p>
-                                    <div>
-                                        <ul>
-                                            <li>Thin white or&nbsp;natural wood frame</li>
-                                            <li>We highly recommend UV protected glass to&nbsp;preserve the integrity of your artwork from prolonged light exposure&nbsp;</li>
-                                        </ul>
-                                    </div>
+                                    <ul>
+                                        <li>Thin white or&nbsp;natural wood frame</li>
+                                        <li>We highly recommend UV protected glass to&nbsp;preserve the integrity of your artwork from prolonged light exposure&nbsp;</li>
+                                    </ul>
                                     <strong>Authenticity</strong>
-                                    <div>
-                                        <ul>
-                                            <li>Artwork&nbsp;is signed by the artist Leia Bryans&nbsp;</li>
-                                        </ul>
-                                    </div>
-                                </div></div>
+                                    <ul>
+                                        <li>Artwork&nbsp;is signed by the artist Leia Bryans&nbsp;</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
