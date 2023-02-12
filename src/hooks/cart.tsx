@@ -1,4 +1,5 @@
-import { createStore, createHook, Action } from 'react-sweet-state';
+import { createStore, createHook, createSubscriber, Action } from 'react-sweet-state';
+import Cookies from 'js-cookie'
 
 type Item = {
     id: string;
@@ -9,8 +10,10 @@ type State = {
     items: Item[];
 }
 
+const itemsFromCookie = Cookies.get("items");
+
 const initialState: State = {
-    items: [],
+    items: itemsFromCookie ? JSON.parse(itemsFromCookie) : [],
 };
 
 
@@ -47,5 +50,7 @@ const Store = createStore({
     initialState,
     actions,
 });
+
+export const ItemsSubscriber = createSubscriber(Store);
 
 export const useCart = createHook(Store);

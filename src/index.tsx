@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
+import Cookies from 'js-cookie'
 import './theme.css';
 import './index.css';
 import Home from './pages/home';
@@ -7,6 +8,7 @@ import Products from './pages/products';
 import Product from './pages/product';
 import NotFound from './pages/not-found';
 import Cart from './pages/cart';
+import { useCart } from './hooks/cart';
 import AnnouncementBar from './announcement-bar';
 import Header from './header';
 import Footer from './footer';
@@ -17,12 +19,21 @@ import {
   Outlet,
 } from "react-router-dom";
 
+const PersistCart = () => {
+  const [{ items }] = useCart();
+  useEffect(() => {
+    Cookies.set('items', JSON.stringify(items));
+  }, [items])
+  return null;
+}
+
 const Layout = () =>
   <>
     <AnnouncementBar />
     <Header />
     <Outlet />
     <Footer />
+    <PersistCart />
   </>
 
 const router = createBrowserRouter([
