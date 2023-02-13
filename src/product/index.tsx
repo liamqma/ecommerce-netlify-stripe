@@ -22,21 +22,17 @@ function Product() {
     const product = productsData.find(p => p.id === id);
     if (!product) throw new Error("Product not found");
 
-    const addItemToCart = () => {
-        addItem(["price_1MZtglBx9e7RzSyHvkmq5o0M", "price_1MXMkEBx9e7RzSyHf1WhESI3"][Math.floor(Math.random() * 2)])
-    }
-
     return (
         <>
             <section className="shopify-section section">
                 <section className="page-width section-template--15459810574504__main-padding">
                     <div className="product product--large product--stacked grid grid--1-col grid--2-col-tablet">
                         <div className="grid__item product__media-wrapper">
-                            <media-gallery role="region" className="product__media-gallery" aria-label="Gallery Viewer" data-desktop-layout="stacked">
-                                <slider-component className="slider-mobile-gutter">
+                            <media-gallery role="region" class="product__media-gallery" aria-label="Gallery Viewer" data-desktop-layout="stacked">
+                                <slider-component class="slider-mobile-gutter">
                                     <ul className="product__media-list grid grid--peek list-unstyled slider slider--mobile">
                                         {product.images.map((image, index) =>
-                                            <li key={index} id="Slide-template--15459810574504__main-24773563875496" className="product__media-item grid__item slider__slide" data-media-id="template--15459810574504__main-24773563875496">
+                                            <li key={index} className="product__media-item grid__item slider__slide" data-media-id="template--15459810574504__main-24773563875496">
                                                 <div className="product__media media gradient global-media-settings" style={{ paddingTop: "150.00000000000003%" }}>
                                                     <img src={image} loading="lazy" width="973" height="1460" alt="" />
                                                 </div>
@@ -63,16 +59,9 @@ function Product() {
                                     </div>
                                 </div>
                                 <div className="product-form__buttons">
-                                    <button onClick={addItemToCart} type="submit" name="add" className="product-form__submit button button--full-width button--secondary">
+                                    <button onClick={() => addItem(product.id)} type="submit" name="add" className="product-form__submit button button--full-width button--secondary">
                                         <span>Add to cart</span>
                                     </button>
-                                </div>
-                                <div>
-                                    <form method="post" action="/cart/add" id="product-form-installment" acceptCharset="UTF-8" className="installment caption-large" >
-                                        <input type="hidden" name="form_type" value="product" />
-                                        <input type="hidden" name="utf8" value="✓" />
-                                        <input type="hidden" name="id" value="42007872536744" />
-                                    </form>
                                 </div>
                                 <div className="product__description rte" dangerouslySetInnerHTML={{ __html: product.description }} />
                             </div>
@@ -83,7 +72,7 @@ function Product() {
             <section className="shopify-section section">
                 <div className="multicolumn color-background-1 background-primary no-heading">
                     <div className="page-width section-template--15459810574504__1643899285fb6b3031-padding isolate">
-                        <slider-component className="slider-mobile-gutter">
+                        <slider-component class="slider-mobile-gutter">
                             <ul className="multicolumn-list contains-content-container grid grid--1-col grid--2-col-desktop grid--3-col-tablet">
                                 <li className="multicolumn-list__item grid__item">
                                     <div className="multicolumn-card content-container">
