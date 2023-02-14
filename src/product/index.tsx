@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from 'react-router-dom';
 
 import "./index.css"
@@ -17,10 +18,16 @@ declare global {
 
 function Product() {
     const [, { addItem }] = useCart();
+    const [showAddedToCartMessage, setShowAddedToCartMessage] = useState(false);
     const { id } = useParams();
 
     const product = productsData.find(p => p.id === id);
     if (!product) throw new Error("Product not found");
+
+    const onAddToCartClick = () => {
+        setShowAddedToCartMessage(true);
+        addItem(product.id);
+    }
 
     return (
         <>
@@ -28,8 +35,8 @@ function Product() {
                 <section className="page-width section-template--15459810574504__main-padding">
                     <div className="product product--large product--stacked grid grid--1-col grid--2-col-tablet">
                         <div className="grid__item product__media-wrapper">
-                            <media-gallery role="region" class="product__media-gallery" aria-label="Gallery Viewer" data-desktop-layout="stacked">
-                                <slider-component class="slider-mobile-gutter">
+                            <media-gallery role="region" className="product__media-gallery" aria-label="Gallery Viewer" data-desktop-layout="stacked">
+                                <slider-component className="slider-mobile-gutter">
                                     <ul className="product__media-list grid grid--peek list-unstyled slider slider--mobile">
                                         {product.images.map((image, index) =>
                                             <li key={index} className="product__media-item grid__item slider__slide" data-media-id="template--15459810574504__main-24773563875496">
@@ -58,8 +65,11 @@ function Product() {
                                         </div>
                                     </div>
                                 </div>
+                                {showAddedToCartMessage && <div className="product-form__error-message-wrapper" role="alert">
+                                    <span className="product-form__error-message">{product.name} has been added to your cart.</span>
+                                </div>}
                                 <div className="product-form__buttons">
-                                    <button onClick={() => addItem(product.id)} type="submit" name="add" className="product-form__submit button button--full-width button--secondary">
+                                    <button onClick={onAddToCartClick} type="submit" name="add" className="product-form__submit button button--full-width button--secondary">
                                         <span>Add to cart</span>
                                     </button>
                                 </div>
@@ -72,7 +82,7 @@ function Product() {
             <section className="shopify-section section">
                 <div className="multicolumn color-background-1 background-primary no-heading">
                     <div className="page-width section-template--15459810574504__1643899285fb6b3031-padding isolate">
-                        <slider-component class="slider-mobile-gutter">
+                        <slider-component className="slider-mobile-gutter">
                             <ul className="multicolumn-list contains-content-container grid grid--1-col grid--2-col-desktop grid--3-col-tablet">
                                 <li className="multicolumn-list__item grid__item">
                                     <div className="multicolumn-card content-container">

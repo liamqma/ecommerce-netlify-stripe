@@ -11,13 +11,27 @@ const stripe = new Stripe(process.env.STRIPE_API_KEY, {
 const URL = process.env.URL;
 
 export const handler: Handler = async (event, context) => {
+  if (!event.body) throw new Error('Incorrect input');
+  const items = JSON.parse(event.body);
+
+  const { data: products } = await stripe.products.list({
+    ids: items.map((item) => item.id),
+    limit: 999,
+  });
+
+  const lineItems = items
+    .map((item) => {
+      const product = products.find((product) => product.id === item.id);
+      if (!product) return undefined;
+      return {
+        price: product.default_price,
+        quantity: item.qty,
+      };
+    })
+    .filter((item) => !!item);
+
   const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        price: 'price_1MZtglBx9e7RzSyHvkmq5o0M',
-        quantity: 1,
-      },
-    ],
+    line_items: lineItems,
     mode: 'payment',
     success_url: `${URL}/thank-you?success=true`,
     cancel_url: `${URL}/cart?canceled=true`,

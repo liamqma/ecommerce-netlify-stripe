@@ -44,7 +44,11 @@ const updateItem = ({ qty, id }: Item): Action<State> => ({ setState, getState }
     setState({ items: [...items.filter(item => item.id !== id), ...qty > 0 ? [{ qty, id }] : []] });
 }
 
-const actions = { addItem, removeItem, updateItem };
+const removeItems = (): Action<State> => ({ setState, getState }) => {
+    setState({ items: [] });
+};
+
+const actions = { addItem, removeItem, updateItem, removeItems };
 
 const Store = createStore({
     initialState,

@@ -8,6 +8,7 @@ import Products from './pages/products';
 import Product from './pages/product';
 import NotFound from './pages/not-found';
 import Cart from './pages/cart';
+import ThankYou from './pages/thank-you';
 import { useCart } from './hooks/cart';
 import AnnouncementBar from './announcement-bar';
 import Header from './header';
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/thank-you",
+        element: <ThankYou />,
       },
       {
         path: "/*",
