@@ -13,12 +13,9 @@ import { useCart } from './hooks/cart';
 import AnnouncementBar from './announcement-bar';
 import Header from './header';
 import Footer from './footer';
+import FullBackgroundImage from './full-background-image';
 import reportWebVitals from './reportWebVitals';
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 const PersistCart = () => {
   const [{ items }] = useCart();
@@ -30,6 +27,7 @@ const PersistCart = () => {
 
 const Layout = () =>
   <>
+    <FullBackgroundImage />
     <AnnouncementBar />
     <Header />
     <Outlet />

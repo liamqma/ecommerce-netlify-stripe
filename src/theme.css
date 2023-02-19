@@ -1,9 +1,18 @@
+@font-face {
+  font-family: 'RocaOne-Th';
+  src: url('./fonts/RocaOne-Th.woff2') format('woff2'),
+    url('./fonts/RocaOne-Th.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --font-body-family: Electra, serif;
+  --font-body-family: 'RocaOne-Th';
   --font-body-style: normal;
   --font-body-weight: 400;
 
-  --font-heading-family: Electra, serif;
+  --font-heading-family: 'Amatic SC', cursive;
   --font-heading-style: normal;
   --font-heading-weight: 400;
 
