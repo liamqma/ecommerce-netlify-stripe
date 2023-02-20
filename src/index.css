@@ -2037,10 +2037,6 @@ input[type='checkbox'] {
   line-height: calc(1 + 0.1 / var(--font-body-scale));
 }
 
-#shopify-section-announcement-bar {
-  z-index: 4;
-}
-
 .announcement-bar {
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
   color: rgb(var(--color-foreground));
