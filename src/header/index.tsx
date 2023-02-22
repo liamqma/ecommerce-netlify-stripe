@@ -1,25 +1,104 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 
 import "./index.css"
 import { useCart } from "../hooks/cart";
 
+declare global {
+    namespace JSX {
+        interface IntrinsicElements {
+            "details-disclosure": any;
+        }
+    }
+}
+
+function MenuDrawerSubMenu() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return <details className={classNames({ "menu-opening": isOpen })} open={isOpen}>
+        <summary onClick={(e) => { setIsOpen(true); e.preventDefault(); }} className="menu-drawer__menu-item list-menu__item link link--text focus-inset" role="button" aria-expanded="false" aria-controls="link-Shop by Artist">
+            Menu Item 3
+            <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" clipRule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
+                </path>
+            </svg>
+            <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-caret" viewBox="0 0 10 6">
+                <path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                </path>
+            </svg>
+        </summary>
+        <div id="link-Shop by Artist" className="menu-drawer__submenu motion-reduce" tabIndex={-1}>
+            <div className="menu-drawer__inner-submenu">
+                <button onClick={() => setIsOpen(false)} className="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                    <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" clipRule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
+                        </path>
+                    </svg>
+                    Menu Item 3
+                </button>
+                <ul className="menu-drawer__menu list-menu" tabIndex={-1}>
+                    <li>
+                        <a href="/collections/eryn-lougheed" className="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                            Sub menu item 1
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/collections/eryn-lougheed" className="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                            Sub menu item 2
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/collections/eryn-lougheed" className="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                            Sub menu item 3
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/collections/eryn-lougheed" className="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                            Sub menu item 4
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/collections/eryn-lougheed" className="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                            Sub menu item 5
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </details>
+}
+
+
+
 function SectionHeader() {
+    const headerRef = useRef<HTMLDivElement>(null);
     const [isMenuOpen, setMenuOpen] = useState(false);
+    const [isSticky, setIsSticy] = useState(false);
     const [{ items }] = useCart();
 
+    useEffect(() => {
+        window.addEventListener("scroll", (event) => {
+            window.requestAnimationFrame(() => {
+                if ((window.scrollY - 190) > window.innerHeight) {
+                    setIsSticy(true);
+                } else {
+                    setIsSticy(false);
+                }
+            });
+        });
+    }, [])
+
     const onSummaryClick = () => {
-        document.getElementsByTagName("body").item(0)?.classList.toggle('overflow-hidden-tablet');
         setMenuOpen(!isMenuOpen);
     }
 
     return (
-        <div id="shopify-section-header" className="shopify-section section-header">
+        <div ref={headerRef} className="section-header">
             <div className="header-wrapper color-background-1">
-                <header className="header header--top-center page-width header--has-menu">
+                <header className={classNames("header header--top-center page-width header--has-menu", { "sticky": isSticky })}>
                     <div className="header-drawer">
-                        <details id="Details-menu-drawer-container" className={classNames("menu-drawer-container", { "menu-opening": isMenuOpen })}>
+                        <details className={classNames("menu-drawer-container", { "menu-opening": isMenuOpen })}>
                             <summary onClick={onSummaryClick} className="header__icon header__icon--menu header__icon--summary link focus-inset" aria-label="Menu" role="button" aria-expanded={isMenuOpen} aria-controls="menu-drawer">
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" className="icon icon-hamburger" fill="none" viewBox="0 0 18 16">
@@ -48,9 +127,7 @@ function SectionHeader() {
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
-                                                        Menu Item 3
-                                                    </a>
+                                                    <MenuDrawerSubMenu />
                                                 </li>
                                                 <li>
                                                     <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
@@ -89,9 +166,44 @@ function SectionHeader() {
                                 </a>
                             </li>
                             <li>
-                                <a href="/#" className="header__menu-item header__menu-item list-menu__item link link--text focus-inset">
-                                    <span>Menu Item 3</span>
-                                </a>
+                                <details-disclosure>
+                                    <details>
+                                        <summary className="header__menu-item list-menu__item link focus-inset" role="button" aria-expanded="true" aria-controls="HeaderMenu-MenuList-4">
+                                            <span>Menu 3</span>
+                                            <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-caret" viewBox="0 0 10 6">
+                                                <path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                                                </path></svg>
+
+                                        </summary>
+                                        <ul className="header__submenu list-menu list-menu--disclosure caption-large motion-reduce" tabIndex={-1}>
+                                            <li>
+                                                <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                                    SubMenu 1
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                                    SubMenu 2
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                                    SubMenu 3
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                                    SubMenu 4
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                                    SubMenu 5
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </details>
+                                </details-disclosure>
                             </li>
                             <li>
                                 <a href="/#" className="header__menu-item header__menu-item list-menu__item link link--text focus-inset">
@@ -99,9 +211,44 @@ function SectionHeader() {
                                 </a>
                             </li>
                             <li>
-                                <a href="/#" className="header__menu-item header__menu-item list-menu__item link link--text focus-inset">
-                                    <span>Menu Item 5</span>
-                                </a>
+                                <details-disclosure>
+                                    <details>
+                                        <summary className="header__menu-item list-menu__item link focus-inset" role="button" aria-expanded="true" aria-controls="HeaderMenu-MenuList-4">
+                                            <span>Menu 5</span>
+                                            <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-caret" viewBox="0 0 10 6">
+                                                <path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                                                </path></svg>
+
+                                        </summary>
+                                        <ul className="header__submenu list-menu list-menu--disclosure caption-large motion-reduce" tabIndex={-1}>
+                                            <li>
+                                                <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                                    SubMenu 1
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                                    SubMenu 2
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                                    SubMenu 3
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                                    SubMenu 4
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                                    SubMenu 5
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </details>
+                                </details-disclosure>
                             </li>
                         </ul>
                     </nav>
