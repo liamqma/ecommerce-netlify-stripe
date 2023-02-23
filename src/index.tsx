@@ -15,7 +15,7 @@ import Header from './header';
 import Footer from './footer';
 import FullBackgroundImage from './full-background-image';
 import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet, useLocation } from "react-router-dom";
 
 const PersistCart = () => {
   const [{ items }] = useCart();
@@ -25,15 +25,17 @@ const PersistCart = () => {
   return null;
 }
 
-const Layout = () =>
-  <>
-    <FullBackgroundImage />
+const Layout = () => {
+  const location = useLocation();
+  return <>
+    {location.pathname === '/' && <FullBackgroundImage />}
     <AnnouncementBar />
     <Header />
     <Outlet />
     <Footer />
     <PersistCart />
   </>
+}
 
 const router = createBrowserRouter([
   {
@@ -72,9 +74,12 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+console.log(process.env);
+
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    {process.env.REACT_APP_IS_UNDER_MAINTENANCE === 'true' ? <FullBackgroundImage isUnderMaintenance /> : <RouterProvider router={router} />}
   </React.StrictMode>
 );
 
