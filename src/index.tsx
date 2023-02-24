@@ -10,12 +10,13 @@ import NotFound from './pages/not-found';
 import Cart from './pages/cart';
 import ThankYou from './pages/thank-you';
 import { useCart } from './hooks/cart';
+import { useIsHome } from './hooks/is-home';
 import AnnouncementBar from './announcement-bar';
 import Header from './header';
 import Footer from './footer';
 import FullBackgroundImage from './full-background-image';
 import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider, Outlet, useLocation } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 const PersistCart = () => {
   const [{ items }] = useCart();
@@ -26,9 +27,9 @@ const PersistCart = () => {
 }
 
 const Layout = () => {
-  const location = useLocation();
+  const isHome = useIsHome();
   return <>
-    {location.pathname === '/' && <FullBackgroundImage />}
+    {isHome && <FullBackgroundImage />}
     <AnnouncementBar />
     <Header />
     <Outlet />
@@ -74,8 +75,6 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-console.log(process.env);
 
 root.render(
   <React.StrictMode>

@@ -2130,10 +2130,6 @@ input[type='checkbox'] {
     grid-template-areas: 'left-icon heading icons' 'navigation navigation navigation';
   }
 
-  .header--top-center.sticky {
-    grid-template-areas: 'heading navigation icons';
-  }
-
   .header:not(.header--middle-left) .header__inline-menu {
     margin-top: 1.05rem;
   }

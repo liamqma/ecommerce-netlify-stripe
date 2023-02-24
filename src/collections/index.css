@@ -2,6 +2,44 @@
   margin-bottom: 15px;
 }
 
+.sticky-header {
+  opacity: 0;
+  height: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transition: height 0.3s ease-out;
+  z-index: 1;
+  background-color: #fff6f1;
+  display: none;
+}
+
+@media screen and (min-width: 1158px) {
+  .sticky-header {
+    display: block;
+  }
+}
+
+.sticky-header.sticky {
+  opacity: 1;
+  height: 55px;
+}
+
+.sticky-header header {
+  grid-template-areas: 'heading navigation icons';
+  padding-top: 0;
+}
+
+.sticky-header header .header__heading-link {
+  padding-top: 0.75rem;
+}
+
+@media screen and (min-width: 990px) {
+  .sticky-header .header:not(.header--middle-left) .header__inline-menu {
+    margin-top: 0;
+  }
+}
+
 @media screen and (min-width: 750px) {
   .section-header {
     margin-bottom: 20px;
