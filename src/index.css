@@ -2037,11 +2037,6 @@ input[type='checkbox'] {
   line-height: calc(1 + 0.1 / var(--font-body-scale));
 }
 
-.announcement-bar {
-  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
-  color: rgb(var(--color-foreground));
-}
-
 .announcement-bar__link {
   display: block;
   width: 100%;
@@ -2585,12 +2580,6 @@ details-disclosure > details {
   border-color: rgba(var(--color-badge-border), var(--alpha-badge-border));
   color: rgb(var(--color-foreground));
   word-break: break-word;
-}
-
-.gradient {
-  background: rgb(var(--color-background));
-  background: var(--gradient-background);
-  background-attachment: fixed;
 }
 
 @media screen and (forced-colors: active) {
