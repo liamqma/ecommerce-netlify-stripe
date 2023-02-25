@@ -268,14 +268,9 @@ html.no-js .no-js-hidden {
   }
 }
 
-body,
-.color-background-1,
-.color-background-2,
-.color-inverse,
-.color-accent-1,
-.color-accent-2 {
-  color: rgba(var(--color-foreground), 0.75);
-  background-color: #fff6f1;
+body {
+  color: var(--color-1);
+  background-color: var(--color-2);
 }
 
 .background-secondary {
