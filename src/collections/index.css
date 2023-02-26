@@ -1,7 +1,3 @@
-.section-header {
-  margin-bottom: 15px;
-}
-
 .sticky-header {
   opacity: 0;
   height: 0;
@@ -30,19 +26,9 @@
   padding-top: 0;
 }
 
-.sticky-header header .header__heading-link {
-  padding-top: 0.75rem;
-}
-
 @media screen and (min-width: 990px) {
   .sticky-header .header:not(.header--middle-left) .header__inline-menu {
     margin-top: 0;
-  }
-}
-
-@media screen and (min-width: 750px) {
-  .section-header {
-    margin-bottom: 20px;
   }
 }
 

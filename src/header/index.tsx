@@ -1,5 +1,6 @@
 import { useState, useEffect, MouseEventHandler } from "react";
 import classNames from "classnames";
+import { css } from '@emotion/css'
 import { Link } from "react-router-dom";
 
 import "./index.css"
@@ -122,8 +123,23 @@ const HeaderDrawer = ({ onSummaryClick, isMenuOpen }: { onSummaryClick: MouseEve
     </details>
 </div>
 
-const Logo = () => <h1 className="header__heading">
-    <Link to="/" className="header__heading-link link link--text focus-inset">
+const Logo = () => <h1 className={css({
+    justifySelf: 'center',
+    gridArea: 'heading',
+    margin: '0',
+    lineHeight: '0',
+})}>
+    <Link to="/" className={css({
+        fontSize: '40px',
+        lineHeight: '40px',
+        paddingTop: '20px',
+        letterSpacing: '5px',
+        display: 'inline-block',
+        padding: '0.75rem',
+        textDecoration: 'none',
+        wordBreak: 'break-word',
+        color: 'var(--color-1)',
+    })}>
         MYSA & CO.
     </Link>
 </h1>
@@ -280,8 +296,8 @@ function SectionHeader() {
 
     return (
         <>
-            <div className="section-header">
-                <div className="header-wrapper color-background-1">
+            <div className={css({ marginBottom: '15px', "@media screen and (min-width: 750px)": { marginBottom: '20px' } })}>
+                <div className={css({ position: 'relative' })}>
                     <header className="header header--top-center page-width header--has-menu">
                         <HeaderDrawer onSummaryClick={onSummaryClick} isMenuOpen={isMenuOpen} />
                         <Logo />

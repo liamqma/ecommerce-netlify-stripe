@@ -277,9 +277,6 @@ details[open] > .menu-drawer__submenu {
   );
 }
 @media screen and (min-width: 750px) {
-  .header-wrapper:not(.header-wrapper--border-bottom) + cart-notification .cart-notification {
-    border-top-width: var(--popup-border-width);
-  }
   .cart-notification {
     border-width: 0 var(--popup-border-width) var(--popup-border-width);
     max-width: 36.8rem;
@@ -723,11 +720,4 @@ summary.list-menu__item {
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
   }
-}
-
-.header__heading-link {
-  font-size: 40px;
-  line-height: 40px;
-  padding-top: 20px;
-  letter-spacing: 5px;
 }
