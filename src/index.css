@@ -2311,16 +2311,6 @@ details[open] > .header__icon--menu .icon-hamburger {
   transform: scale(0.8);
 }
 
-.js details[open]:not(.menu-opening) > .header__icon--menu .icon-close {
-  visibility: hidden;
-}
-
-.js details[open]:not(.menu-opening) > .header__icon--menu .icon-hamburger {
-  visibility: visible;
-  opacity: 1;
-  transform: scale(1.07);
-}
-
 .js .header__inline-menu details > .header__submenu {
   opacity: 0;
   transform: translateY(-1.5rem);

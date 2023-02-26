@@ -2,6 +2,7 @@ import { useState, useEffect, MouseEventHandler } from "react";
 import classNames from "classnames";
 import { css } from '@emotion/css'
 import { Link } from "react-router-dom";
+import { Property } from 'csstype';
 
 import "./index.css"
 import { useCart, Item } from "../hooks/cart";
@@ -71,57 +72,86 @@ function MenuDrawerSubMenu() {
     </details>
 }
 
-const HeaderDrawer = ({ onSummaryClick, isMenuOpen }: { onSummaryClick: MouseEventHandler, isMenuOpen: boolean }) => <div className="header-drawer">
-    <details className={classNames("menu-drawer-container", { "menu-opening": isMenuOpen })}>
-        <summary onClick={onSummaryClick} className="header__icon header__icon--menu header__icon--summary link focus-inset" aria-label="Menu" role="button" aria-expanded={isMenuOpen} aria-controls="menu-drawer">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" className="icon icon-hamburger" fill="none" viewBox="0 0 18 16">
-                    <path d="M1 .5a.5.5 0 100 1h15.71a.5.5 0 000-1H1zM.5 8a.5.5 0 01.5-.5h15.71a.5.5 0 010 1H1A.5.5 0 01.5 8zm0 7a.5.5 0 01.5-.5h15.71a.5.5 0 010 1H1a.5.5 0 01-.5-.5z" fill="currentColor">
-                    </path></svg>
+const HeaderDrawer = ({ onSummaryClick }: { onSummaryClick: MouseEventHandler }) => {
+    const svgStyle = {
+        display: 'block',
+        position: 'absolute' as Property.Position,
+        opacity: '1',
+        transform: 'scale(1)',
+        transition: 'transform 0.15s ease, opacity 0.15s ease',
+        height: '2rem',
+        width: '2rem',
+        fill: 'none',
+        verticalAlign: 'middle',
+        "&:hover": {
+            transform: 'scale(1.08)',
+        }
+    };
 
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" className="icon icon-close" fill="none" viewBox="0 0 18 17">
-                    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
-                    </path></svg>
+    const svgInvisibleStyle = {
+        visibility: 'hidden' as Property.Visibility,
+        opacity: '0',
+        transform: 'scale(0.8)'
+    }
 
-            </span>
-        </summary>
-        <div className="menu-drawer motion-reduce" tabIndex={-1}>
-            <div className="menu-drawer__inner-container">
-                <div className="menu-drawer__navigation-container">
-                    <nav className="menu-drawer__navigation">
-                        <ul className="menu-drawer__menu list-menu">
-                            <li>
-                                <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
-                                    Menu Item 1
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
-                                    Menu Item 2
-                                </a>
-                            </li>
-                            <li>
-                                <MenuDrawerSubMenu />
-                            </li>
-                            <li>
-                                <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
-                                    Menu Item 4
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
-                                    Menu Item 5
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div className="menu-drawer__utility-links"><ul className="list list-social list-unstyled"></ul>
+    return <div className={css({
+        justifySelf: "start",
+        marginLeft: "-1.2rem",
+        "@media screen and (min-width: 990px)": {
+            display: 'none'
+        }
+    })}>
+        <details className={css({ display: 'flex' })}>
+            <summary onClick={onSummaryClick} className="header__icon header__icon--menu header__icon--summary link focus-inset" aria-label="Menu" role="button" aria-controls="menu-drawer">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" className={css([svgStyle, { "details[open] &": svgInvisibleStyle }])} fill="none" viewBox="0 0 18 16">
+                        <path d="M1 .5a.5.5 0 100 1h15.71a.5.5 0 000-1H1zM.5 8a.5.5 0 01.5-.5h15.71a.5.5 0 010 1H1A.5.5 0 01.5 8zm0 7a.5.5 0 01.5-.5h15.71a.5.5 0 010 1H1a.5.5 0 01-.5-.5z" fill="currentColor">
+                        </path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" className={css([svgStyle, { "details:not([open]) &": svgInvisibleStyle }])} fill="none" viewBox="0 0 18 17">
+                        <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
+                        </path>
+                    </svg>
+                </span>
+            </summary>
+            <div className="menu-drawer motion-reduce" tabIndex={-1}>
+                <div className="menu-drawer__inner-container">
+                    <div className="menu-drawer__navigation-container">
+                        <nav className="menu-drawer__navigation">
+                            <ul className="menu-drawer__menu list-menu">
+                                <li>
+                                    <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                                        Menu Item 1
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                                        Menu Item 2
+                                    </a>
+                                </li>
+                                <li>
+                                    <MenuDrawerSubMenu />
+                                </li>
+                                <li>
+                                    <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                                        Menu Item 4
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                                        Menu Item 5
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div className="menu-drawer__utility-links"><ul className="list list-social list-unstyled"></ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </details>
-</div>
+        </details>
+    </div>
+}
 
 const Logo = () => <h1 className={css({
     justifySelf: 'center',
@@ -299,7 +329,7 @@ function SectionHeader() {
             <div className={css({ marginBottom: '15px', "@media screen and (min-width: 750px)": { marginBottom: '20px' } })}>
                 <div className={css({ position: 'relative' })}>
                     <header className="header header--top-center page-width header--has-menu">
-                        <HeaderDrawer onSummaryClick={onSummaryClick} isMenuOpen={isMenuOpen} />
+                        <HeaderDrawer onSummaryClick={onSummaryClick} />
                         <Logo />
                         <Nav />
                         <HeaderIcons items={items} />
@@ -308,7 +338,7 @@ function SectionHeader() {
             </div>
             {isHome && <div className={classNames("section-header sticky-header", { "sticky": isSticky })}>
                 <header className="header header--top-center page-width header--has-menu">
-                    <HeaderDrawer onSummaryClick={onSummaryClick} isMenuOpen={isMenuOpen} />
+                    <HeaderDrawer onSummaryClick={onSummaryClick} />
                     <Logo />
                     <Nav />
                     <HeaderIcons items={items} />

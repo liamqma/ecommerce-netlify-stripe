@@ -479,12 +479,7 @@ a.active-facets__button.focused .active-facets__button-inner,
       var(--drawer-shadow-blur-radius) rgba(var(--color-shadow), var(--drawer-shadow-opacity))
   );
 }
-.menu-opening .mobile-facets__inner {
-  transform: translate(0);
-}
-.js .disclosure-has-popup:not(.menu-opening) .mobile-facets__inner {
-  transform: translate(105vw);
-}
+
 .mobile-facets__header {
   background-color: rgb(var(--color-background));
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
@@ -564,13 +559,6 @@ a.active-facets__button.focused .active-facets__button-inner,
 .mobile-facets__close svg {
   width: 2.2rem;
 }
-details.menu-opening .mobile-facets__close {
-  display: flex;
-  opacity: 1;
-}
-details.menu-opening .mobile-facets__close svg {
-  margin: 0;
-}
 .mobile-facets__close-button {
   align-items: center;
   background-color: transparent;
@@ -646,10 +634,6 @@ details.menu-opening .mobile-facets__close svg {
 .js details[open] > .mobile-facets__submenu {
   transition: transform 0.4s cubic-bezier(0.29, 0.63, 0.44, 1),
     visibility 0.4s cubic-bezier(0.29, 0.63, 0.44, 1);
-}
-.js details[open].menu-opening > .mobile-facets__submenu {
-  transform: translate(0);
-  visibility: visible;
 }
 .js .menu-drawer__submenu .mobile-facets__submenu {
   overflow-y: auto;

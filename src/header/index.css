@@ -672,21 +672,6 @@ cart-remove-button .icon-remove {
   cursor: default;
 }
 
-.header-drawer {
-  justify-self: start;
-  margin-left: -1.2rem;
-}
-
-@media screen and (min-width: 990px) {
-  .header-drawer {
-    display: none;
-  }
-}
-
-.menu-drawer-container {
-  display: flex;
-}
-
 .list-menu {
   list-style: none;
   padding: 0;
