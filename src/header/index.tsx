@@ -7,6 +7,78 @@ import { Property } from 'csstype';
 import "./index.css"
 import { useCart, Item } from "../hooks/cart";
 import { useIsHome } from '../hooks/is-home';
+import { IconArrow } from "../icons/arrow";
+
+type MenuItem = {
+    href?: string;
+    name: string;
+    children?: MenuItem[];
+}
+
+const menu: MenuItem[] = [
+    {
+        href: '#',
+        name: 'Menu Item 1',
+    },
+    {
+        name: 'Menu Item 2',
+        children: [
+            {
+                href: '#',
+                name: 'Sub Menu Item 1',
+            },
+            {
+                href: '#',
+                name: 'Sub Menu Item 2',
+            },
+            {
+                href: '#',
+                name: 'Sub Menu Item 3',
+            },
+            {
+                href: '#',
+                name: 'Sub Menu Item 4',
+            },
+            {
+                href: '#',
+                name: 'Sub Menu Item 5',
+            },
+        ]
+    },
+    {
+        href: '#',
+        name: 'Menu Item 3',
+    },
+    {
+        href: '#',
+        name: 'Menu Item 4',
+    },
+    {
+        name: 'Menu Item 5',
+        children: [
+            {
+                href: '#',
+                name: 'Sub Menu Item 1',
+            },
+            {
+                href: '#',
+                name: 'Sub Menu Item 2',
+            },
+            {
+                href: '#',
+                name: 'Sub Menu Item 3',
+            },
+            {
+                href: '#',
+                name: 'Sub Menu Item 4',
+            },
+            {
+                href: '#',
+                name: 'Sub Menu Item 5',
+            },
+        ]
+    }
+]
 
 declare global {
     namespace JSX {
@@ -16,56 +88,53 @@ declare global {
     }
 }
 
-function MenuDrawerSubMenu() {
+function MenuDrawerSubMenu({ name, children }: MenuItem) {
     const [isOpen, setIsOpen] = useState(false);
 
     return <details className={classNames({ "menu-opening": isOpen })} open={isOpen}>
-        <summary onClick={(e) => { setIsOpen(true); e.preventDefault(); }} className="menu-drawer__menu-item list-menu__item link link--text focus-inset" role="button" aria-expanded="false" aria-controls="link-Shop by Artist">
-            Menu Item 3
-            <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
-                </path>
-            </svg>
-            <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-caret" viewBox="0 0 10 6">
-                <path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
-                </path>
-            </svg>
+        <summary onClick={(e) => { setIsOpen(true); e.preventDefault(); }} className={css({
+            paddingRight: '5.2rem',
+            display: 'flex',
+            alignItems: 'center',
+            lineHeight: 'calc(1 + 0.3 / var(--font-body-scale))',
+            padding: '1.1rem 3.2rem',
+            textDecoration: 'none',
+            fontSize: '1.8rem',
+            color: 'var(--color-1)',
+            cursor: 'pointer',
+            border: 'none',
+            boxShadow: 'none',
+            textUnderlineOffset: '0.3rem',
+            backgroundColor: 'transparent',
+            fontFamily: 'inherit',
+            listStyle: 'none',
+            position: 'relative',
+        })} role="button" aria-expanded="false" aria-controls="link-Shop by Artist">
+            {name}
+            <IconArrow className={css({
+                position: 'absolute',
+                right: '2.5rem',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '1.5rem'
+            })} />
         </summary>
         <div id="link-Shop by Artist" className="menu-drawer__submenu motion-reduce" tabIndex={-1}>
             <div className="menu-drawer__inner-submenu">
                 <button onClick={() => setIsOpen(false)} className="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
-                    <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" className="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
-                        </path>
-                    </svg>
-                    Menu Item 3
+                    <IconArrow className={css({
+                        transform: 'rotate(180deg)',
+                        marginRight: '1rem',
+                        width: '1.5rem'
+                    })} />
+                    {name}
                 </button>
                 <ul className="menu-drawer__menu list-menu" tabIndex={-1}>
-                    <li>
-                        <a href="/collections/eryn-lougheed" className="menu-drawer__menu-item link link--text list-menu__item focus-inset">
-                            Sub menu item 1
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/collections/eryn-lougheed" className="menu-drawer__menu-item link link--text list-menu__item focus-inset">
-                            Sub menu item 2
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/collections/eryn-lougheed" className="menu-drawer__menu-item link link--text list-menu__item focus-inset">
-                            Sub menu item 3
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/collections/eryn-lougheed" className="menu-drawer__menu-item link link--text list-menu__item focus-inset">
-                            Sub menu item 4
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/collections/eryn-lougheed" className="menu-drawer__menu-item link link--text list-menu__item focus-inset">
-                            Sub menu item 5
-                        </a>
-                    </li>
+                    {children?.map(({ href, name }, index) => href && <li>
+                        <Link to={href} key={index} className="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                            {name}
+                        </Link>
+                    </li>)}
                 </ul>
             </div>
         </div>
@@ -119,29 +188,20 @@ const HeaderDrawer = ({ onSummaryClick }: { onSummaryClick: MouseEventHandler })
                     <div className="menu-drawer__navigation-container">
                         <nav className="menu-drawer__navigation">
                             <ul className="menu-drawer__menu list-menu">
-                                <li>
-                                    <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
-                                        Menu Item 1
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
-                                        Menu Item 2
-                                    </a>
-                                </li>
-                                <li>
-                                    <MenuDrawerSubMenu />
-                                </li>
-                                <li>
-                                    <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
-                                        Menu Item 4
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/#" className="menu-drawer__menu-item list-menu__item link link--text focus-inset">
-                                        Menu Item 5
-                                    </a>
-                                </li>
+                                {menu.map(({ href, name, children }, index) => {
+                                    return <li key={index}>
+                                        {children ? <MenuDrawerSubMenu href={href} name={name} children={children} /> : <Link to={"#"} className={css({
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            lineHeight: 'calc(1 + 0.3 / var(--font-body-scale))',
+                                            padding: '1.1rem 3.2rem',
+                                            textDecoration: 'none',
+                                            fontSize: '1.8rem',
+                                            textUnderlineOffset: '0.3rem',
+                                            color: 'var(--color-1)',
+                                        })}>{name}</Link>}
+                                    </li>
+                                })}
                             </ul>
                         </nav>
                         <div className="menu-drawer__utility-links"><ul className="list list-social list-unstyled"></ul>
