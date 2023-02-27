@@ -121,6 +121,10 @@
   --variant-pills-shadow-horizontal-offset: 0px;
   --variant-pills-shadow-vertical-offset: 0px;
   --variant-pills-shadow-blur-radius: 0px;
+
+  --duration-short: 0.1s;
+  --duration-default: 0.2s;
+  --duration-long: 0.5s;
 }
 
 *,

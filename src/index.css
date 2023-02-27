@@ -662,12 +662,6 @@ details > * {
   }
 }
 
-:root {
-  --duration-short: 0.1s;
-  --duration-default: 0.2s;
-  --duration-long: 0.5s;
-}
-
 .underlined-link,
 .customer a {
   color: rgba(var(--color-link), var(--alpha-link));
