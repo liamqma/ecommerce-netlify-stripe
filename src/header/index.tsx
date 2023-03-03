@@ -1,9 +1,7 @@
 import { useState, useEffect, MouseEventHandler } from "react";
-import classNames from "classnames";
 import { css } from '@emotion/css'
 import { Link } from "react-router-dom";
 
-import "./index.css"
 import { useCart, Item } from "../hooks/cart";
 import { useIsHome } from '../hooks/is-home';
 import { IconArrow } from "../icons/arrow";
@@ -192,7 +190,7 @@ function MenuDrawerSubMenu({ name, children }: MenuItem) {
                     padding: '0',
                     margin: '0'
                 })} tabIndex={-1}>
-                    {children?.map(({ href, name }, index) => href && <li>
+                    {children?.map(({ href, name }, index) => href && <li key={index}>
                         <Link to={href} key={index} className={linkStyle}>
                             {name}
                         </Link>
@@ -304,103 +302,131 @@ const Logo = () => <h1 className={css({
     </Link>
 </h1>
 
-const Nav = () => <nav className="header__inline-menu">
-    <ul className="list-menu list-menu--inline">
-        <li>
-            <a href="/#" className="header__menu-item header__menu-item list-menu__item link link--text focus-inset">
-                <span>Menu Item 1</span>
-            </a>
-        </li>
-        <li>
-            <a href="/#" className="header__menu-item header__menu-item list-menu__item link link--text focus-inset">
-                <span>Menu Item 2</span>
-            </a>
-        </li>
-        <li>
-            <details-disclosure>
-                <details>
-                    <summary className="header__menu-item list-menu__item link focus-inset" role="button" aria-expanded="true" aria-controls="HeaderMenu-MenuList-4">
-                        <span>Menu 3</span>
-                        <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-caret" viewBox="0 0 10 6">
-                            <path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
-                            </path></svg>
-
-                    </summary>
-                    <ul className="header__submenu list-menu list-menu--disclosure caption-large motion-reduce" tabIndex={-1}>
-                        <li>
-                            <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
-                                SubMenu 1
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
-                                SubMenu 2
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
-                                SubMenu 3
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
-                                SubMenu 4
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
-                                SubMenu 5
-                            </a>
-                        </li>
-                    </ul>
-                </details>
-            </details-disclosure>
-        </li>
-        <li>
-            <a href="/#" className="header__menu-item header__menu-item list-menu__item link link--text focus-inset">
-                <span>Menu Item 4</span>
-            </a>
-        </li>
-        <li>
-            <details-disclosure>
-                <details>
-                    <summary className="header__menu-item list-menu__item link focus-inset" role="button" aria-expanded="true" aria-controls="HeaderMenu-MenuList-4">
-                        <span>Menu 5</span>
-                        <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-caret" viewBox="0 0 10 6">
-                            <path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
-                            </path></svg>
-
-                    </summary>
-                    <ul className="header__submenu list-menu list-menu--disclosure caption-large motion-reduce" tabIndex={-1}>
-                        <li>
-                            <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
-                                SubMenu 1
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
-                                SubMenu 2
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
-                                SubMenu 3
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
-                                SubMenu 4
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/collections/eryn-lougheed" className="header__menu-item list-menu__item link link--text focus-inset caption-large">
-                                SubMenu 5
-                            </a>
-                        </li>
-                    </ul>
-                </details>
-            </details-disclosure>
-        </li>
+const Nav = ({ isSticky = false }: { isSticky?: boolean }) => <nav className={css({
+    "@media screen and (min-width: 990px)": {
+        marginTop: isSticky ? 0 : '1.05rem',
+        justifySelf: 'center',
+        display: 'block',
+    },
+    marginLeft: '-1.2rem',
+    gridArea: 'navigation',
+    display: 'none'
+})}>
+    <ul className={css({
+        "@media screen and (min-width: 990px)": {
+            justifyContent: 'center',
+        },
+        display: 'inline-flex',
+        flexWrap: 'wrap',
+        listStyle: 'none',
+        padding: '0',
+        margin: '0',
+    })} >
+        {menu.map((menuItem, index) =>
+            <li key={index}>
+                {menuItem.children ? <details-disclosure>
+                    <details>
+                        <summary className={css({
+                            "details[open]>&": {
+                                textDecoration: 'underline'
+                            },
+                            "details[open]>&:hover": {
+                                textDecorationThickness: '.2rem'
+                            },
+                            display: 'flex',
+                            alignItems: 'center',
+                            lineHeight: 'calc(1 + 0.3 / var(--font-body-scale))',
+                            padding: '1.2rem',
+                            paddingRight: '2.7rem',
+                            textDecoration: 'none',
+                            color: 'rgba(var(--color-foreground),.75)',
+                            cursor: 'pointer',
+                            border: 'none',
+                            boxShadow: 'none',
+                            textUnderlineOffset: '.3rem',
+                            backgroundColor: 'transparent',
+                            fontSize: '1.4rem',
+                            fontFamily: 'inherit',
+                        })} role="button" aria-expanded="true" aria-controls="HeaderMenu-MenuList-4">
+                            <span>{menuItem.name}</span>
+                            <svg aria-hidden="true" focusable="false" role="presentation" className={css({
+                                "details[open] &": {
+                                    transform: 'rotate(180deg)',
+                                },
+                                right: '.8rem',
+                                position: 'absolute',
+                                height: '.6rem',
+                                top: 'calc(50% - .2rem)',
+                            })} viewBox="0 0 10 6">
+                                <path fillRule="evenodd" clipRule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                                </path>
+                            </svg>
+                        </summary>
+                        <ul className={css({
+                            padding: '2.4rem 0',
+                            borderRadius: 'var(--popup-corner-radius)',
+                            borderColor: 'rgba(var(--color-foreground), var(--popup-border-opacity))',
+                            borderStyle: 'solid',
+                            borderWidth: 'var(--popup-border-width)',
+                            boxShadow: 'var(--popup-shadow-horizontal-offset) var(--popup-shadow-vertical-offset) var(--popup-shadow-blur-radius) rgba(var(--color-shadow), var(--popup-shadow-opacity))',
+                            listStyle: 'none',
+                            margin: '0',
+                            position: 'absolute',
+                            minWidth: '100%',
+                            width: '20rem',
+                            border: '1px solid rgba(var(--color-foreground), 0.2)',
+                            backgroundColor: 'var(--color-2)',
+                            fontSize: '1.3rem',
+                            lineHeight: 'calc(1 + 0.5 / var(--font-body-scale))',
+                            letterSpacing: '0.04rem',
+                            zIndex: 1
+                        })} tabIndex={-1}>
+                            {menuItem.children.map((mItem, index) =>
+                                <li key={index}>
+                                    <a href={mItem.href} className={css({
+                                        justifyContent: 'space-between',
+                                        padding: '0.8rem 2.4rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        lineHeight: 'calc(1 + 0.3 / var(--font-body-scale))',
+                                        textDecoration: 'none',
+                                        color: 'var(--color-1)',
+                                        cursor: 'pointer',
+                                        border: 'none',
+                                        boxShadow: 'none',
+                                        textUnderlineOffset: '0.3rem',
+                                        backgroundColor: 'transparent',
+                                        fontSize: '1.4rem',
+                                        fontFamily: 'inherit',
+                                        letterSpacing: '0.04rem',
+                                        ":hover": {
+                                            color: 'var(--color-3)',
+                                        }
+                                    })}>
+                                        {mItem.name}
+                                    </a>
+                                </li>)}
+                        </ul>
+                    </details>
+                </details-disclosure> :
+                    <a href={menuItem.href} className={css({
+                        display: 'flex',
+                        alignItems: 'center',
+                        lineHeight: 'calc(1 + 0.3 / var(--font-body-scale))',
+                        padding: '1.2rem',
+                        color: 'var(--color-1)',
+                        textDecoration: 'none',
+                        textUnderlineOffset: '0.3rem',
+                        fontSize: '1.4rem',
+                        fontFamily: 'inherit',
+                        ":hover": {
+                            textDecoration: 'underline',
+                            color: 'var(--color-3)',
+                        }
+                    })}>
+                        <span>{menuItem.name}</span>
+                    </a>}
+            </li>)}
     </ul>
 </nav>
 
@@ -412,13 +438,15 @@ const HeaderIcons = ({ items }: { items: Item[] }) =>
     })}>
         <a href="https://billing.stripe.com/p/login/test_5kAeWl82y7gL3w45kk" className={css({
             color: "var(--color-1)",
-            marginRight: "10px"
+            marginRight: "10px",
+            display: 'flex',
+            alignItems: 'center',
         })}>
             <svg
                 viewBox="0 0 1024 1024"
                 fill="currentColor"
-                height="2em"
-                width="2em"
+                height="2.1em"
+                width="2.1em"
             >
                 <path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z" />
             </svg>
@@ -426,6 +454,8 @@ const HeaderIcons = ({ items }: { items: Item[] }) =>
         <a href="/cart" className={css({
             color: "var(--color-1)",
             position: "relative",
+            display: 'flex',
+            alignItems: 'center',
         })}>
             <svg
                 fill="currentColor"
@@ -480,7 +510,23 @@ function SectionHeader() {
         <>
             <div className={css({ marginBottom: '15px', "@media screen and (min-width: 750px)": { marginBottom: '20px' } })}>
                 <div className={css({ position: 'relative' })}>
-                    <header className="header header--top-center page-width header--has-menu">
+                    <header className={css({
+                        display: 'grid',
+                        gridTemplateAreas: '\'left-icon heading icons\'',
+                        gridTemplateColumns: '1fr 2fr 1fr',
+                        alignItems: 'center',
+                        maxWidth: 'var(--page-width)',
+                        margin: '0 auto',
+                        padding: '1rem 1.5rem',
+                        "@media screen and (min-width: 750px)": {
+                            padding: '1rem 5rem',
+                        },
+                        "@media screen and (min-width: 990px)": {
+                            paddingBottom: '0',
+                            gridTemplateAreas: "'left-icon heading icons' 'navigation navigation navigation'",
+                            paddingTop: '2rem',
+                        },
+                    })}>
                         <HeaderDrawer onSummaryClick={onSummaryClick} />
                         <Logo />
                         <Nav />
@@ -488,11 +534,44 @@ function SectionHeader() {
                     </header>
                 </div>
             </div>
-            {isHome && <div className={classNames("section-header sticky-header", { "sticky": isSticky })}>
-                <header className="header header--top-center page-width header--has-menu">
+            {isHome && <div className={css({
+                opacity: '0',
+                height: '0',
+                position: 'fixed',
+                top: '0',
+                width: '100%',
+                transition: 'height 0.3s ease-out',
+                zIndex: '1',
+                backgroundColor: 'var(--color-2)',
+                display: 'none',
+                "@media screen and (min-width: 1158px)": {
+                    display: 'block'
+                },
+                ...isSticky && {
+                    opacity: '1',
+                    height: '55px'
+                }
+            })}>
+                <header className={css({
+                    display: 'grid',
+                    gridTemplateAreas: '\'left-icon heading icons\'',
+                    gridTemplateColumns: '1fr 3fr 1fr',
+                    alignItems: 'center',
+                    maxWidth: 'var(--page-width)',
+                    margin: '0 auto',
+                    padding: '1rem 1.5rem',
+                    "@media screen and (min-width: 750px)": {
+                        padding: '1rem 5rem',
+                    },
+                    "@media screen and (min-width: 990px)": {
+                        gridTemplateAreas: "'heading navigation icons'",
+                        paddingTop: 0,
+                        paddingBottom: 0,
+                    },
+                })}>
                     <HeaderDrawer onSummaryClick={onSummaryClick} />
                     <Logo />
-                    <Nav />
+                    <Nav isSticky={isSticky} />
                     <HeaderIcons items={items} />
                 </header>
             </div>
