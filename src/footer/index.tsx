@@ -1,80 +1,124 @@
-import "./index.css"
+import { css } from '@emotion/css'
+
+const linkStyle = css({
+    fontSize: '1.4rem',
+    color: 'var(--color-1)',
+})
+
+const ulStyle = css({
+    margin: 0,
+    marginBottom: '4rem',
+    padding: '0',
+    listStyle: 'none',
+    "@media screen and (min-width: 750px)": {
+        marginBottom: '0'
+    }
+});
+
+const h2Style = css({
+    marginBottom: '2rem',
+    marginTop: '0',
+    fontSize: 'calc(var(--font-heading-scale) * 1.6rem)',
+    "@media screen and (min-width: 990px)": {
+        fontSize: 'calc(var(--font-heading-scale) * 1.8rem)'
+    }
+})
 
 function Footer() {
     return (
-        <footer className="footer color-background-2 gradient section-footer-padding">
-            <div className="footer__content-top page-width">
-                <div className="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet ">
-                    <div className="footer-block grid__item footer-block--menu">
-                        <h2 className="footer-block__heading">Shop</h2>
-                        <ul className="footer-block__details-content list-unstyled">
+        <footer className={css({
+            padding: '33px 25px 24px 25px',
+            "@media screen and (min-width: 750px)": {
+                paddingBottom: '32px',
+                paddingTop: '44px'
+            }
+        })}>
+            <div className={css({
+                maxWidth: 'var(--page-width)',
+                margin: '0 auto',
+                padding: '0 1.5rem 5rem 1.5rem',
+                "@media screen and (min-width: 750px)": {
+                    padding: '0 5rem 5rem 5rem',
+                },
+            })}>
+                <div className={css({
+                    display: 'block',
+                    marginBottom: '2rem',
+                    columnGap: 'var(--grid-mobile-horizontal-spacing)',
+                    "@media screen and (min-width: 750px)": {
+                        display: 'flex',
+                    },
+                })}>
+                    <div className={css({
+                        flexBasis: "25%"
+                    })}>
+                        <h2 className={h2Style}>Shop</h2>
+                        <ul className={ulStyle}>
                             <li>
-                                <a href="/collections/prints" className="link link--text list-menu__item list-menu__item--link">
+                                <a href="/collections/prints" className={linkStyle}>
                                     Menu Item 1
                                 </a>
                             </li>
                             <li>
-                                <a href="/collections/originals" className="link link--text list-menu__item list-menu__item--link">
+                                <a href="/collections/originals" className={linkStyle}>
                                     Menu Item 2
                                 </a>
                             </li>
                             <li>
-                                <a href="/collections/art-objects" className="link link--text list-menu__item list-menu__item--link">
+                                <a href="/collections/art-objects" className={linkStyle}>
                                     Menu Item 3
                                 </a>
                             </li>
                             <li>
-                                <a href="/products/gift-card" className="link link--text list-menu__item list-menu__item--link">
+                                <a href="/products/gift-card" className={linkStyle}>
                                     Menu Item 4
                                 </a>
                             </li>
                             <li>
-                                <a href="/search" className="link link--text list-menu__item list-menu__item--link">
+                                <a href="/search" className={linkStyle}>
                                     Menu Item 5
                                 </a>
                             </li>
                         </ul>
                     </div>
-                    <div className="footer-block grid__item footer-block--menu">
-                        <h2 className="footer-block__heading">Info</h2>
-                        <ul className="footer-block__details-content list-unstyled">
+                    <div className={css({
+                        flexBasis: "25%"
+                    })}>
+                        <h2 className={h2Style}>Info</h2>
+                        <ul className={ulStyle}>
                             <li>
-                                <a href="/pages/about-us" className="link link--text list-menu__item list-menu__item--link">
+                                <a href="/pages/about-us" className={linkStyle}>
                                     Our Story
                                 </a>
                             </li><li>
-                                <a href="/blogs/news" className="link link--text list-menu__item list-menu__item--link">
+                                <a href="/blogs/news" className={linkStyle}>
                                     Menu Item 1
                                 </a>
                             </li><li>
-                                <a href="/pages/contact" className="link link--text list-menu__item list-menu__item--link">
+                                <a href="/pages/contact" className={linkStyle}>
                                     Menu Item 2
                                 </a>
                             </li>
                         </ul>
                     </div>
-                    <div className="footer-block grid__item">
-                        <div className="footer-block__details-content footer-block-image right">
-                        </div>
-                    </div>
-                    <div className="footer-block grid__item">
-                        <h2 className="footer-block__heading">Our mission</h2>
-                        <div className="footer-block__details-content rte">
-                            <p>We curate affordably priced pieces from the most exciting up-and-coming artists.</p>
-                        </div>
-                    </div>
-                </div>
-            </div><div className="footer__content-bottom">
-                <div className="footer__content-bottom-wrapper page-width">
-                    <div className="footer__column footer__localization isolate"></div>
-                    <div className="footer__column footer__column--info">
-                        <div className="footer__copyright caption">
-                            <small className="copyright__content">© 2023 MYSA & CO. Sydney, Australia</small>
-                        </div>
+                    <div className={css({
+                        flexBasis: "25%"
+                    })}>
+                        <h2 className={h2Style}>Our mission</h2>
+                        <p>We curate affordably priced pieces from the most exciting up-and-coming artists.</p>
                     </div>
                 </div>
             </div>
-        </footer>
+            <div className={css({
+                borderTop: 'solid 0.1rem var(--color-4)',
+                paddingTop: '3rem', fontSize: '1.2rem',
+                textAlign: 'center',
+                width: '100%'
+            })}>
+
+                <small>© 2023 MYSA & CO. Sydney, Australia</small>
+            </div>
+        </footer >
     );
 }
 
