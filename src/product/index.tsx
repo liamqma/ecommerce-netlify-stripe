@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from 'react-router-dom';
+import { css } from '@emotion/css'
 
 import "./index.css"
 import productsData from "../data/products";
@@ -9,7 +10,6 @@ declare global {
     namespace JSX {
         interface IntrinsicElements {
             "media-gallery": any;
-            "slider-component": any;
             "modal-opener": any;
             "product-form": any;
         }
@@ -36,7 +36,7 @@ function Product() {
                     <div className="product product--large product--stacked grid grid--1-col grid--2-col-tablet">
                         <div className="grid__item product__media-wrapper">
                             <media-gallery role="region" className="product__media-gallery" aria-label="Gallery Viewer" data-desktop-layout="stacked">
-                                <slider-component className="slider-mobile-gutter">
+                                <div className="slider-mobile-gutter">
                                     <ul className="product__media-list grid grid--peek list-unstyled slider slider--mobile">
                                         {product.images.map((image, index) =>
                                             <li key={index} className="product__media-item grid__item slider__slide" data-media-id="template--15459810574504__main-24773563875496">
@@ -46,7 +46,7 @@ function Product() {
                                             </li>
                                         )}
                                     </ul>
-                                </slider-component>
+                                </div>
                             </media-gallery>
                         </div>
                         <div className="product__info-wrapper grid__item">
@@ -79,36 +79,48 @@ function Product() {
                     </div>
                 </section>
             </section>
-            <section className="shopify-section section">
-                <div className="multicolumn color-background-1 background-primary no-heading">
-                    <div className="page-width section-template--15459810574504__1643899285fb6b3031-padding isolate">
-                        <slider-component className="slider-mobile-gutter">
-                            <ul className="multicolumn-list contains-content-container grid grid--1-col grid--2-col-desktop grid--3-col-tablet">
-                                <li className="multicolumn-list__item grid__item">
-                                    <div className="multicolumn-card content-container">
-                                        <div className="multicolumn-card__info">
-                                            <h3>Shipping</h3>
-                                            <div className="rte">
-                                                <p>Shipping rates are calculated by the size of the package and shipped via Canada Post within 10 business days.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li className="multicolumn-list__item grid__item">
-                                    <div className="multicolumn-card content-container">
-                                        <div className="multicolumn-card__info">
-                                            <h3>Returns</h3>
-                                            <div className="rte">
-                                                <p>All artworks can be returned in their original packaging and original condition within 14 days of receipt if it is not to your liking.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </slider-component>
-                    </div>
-                </div>
-            </section>
+            <div className={css({
+                maxWidth: 'var(--page-width)',
+                margin: '0 auto',
+                padding: '42px 1.5rem 27px 1.5rem',
+                "@media screen and (min-width: 750px)": {
+                    padding: '56px 5rem 36px 5rem',
+                }
+            })}>
+                <ul className={css({
+                    margin: '0',
+                    padding: '0',
+                    display: 'flex',
+                    listStyle: 'none',
+                    columnGap: 'var(--grid-mobile-horizontal-spacing)',
+                    rowGap: 'var(--grid-mobile-vertical-spacing)',
+                    "@media screen and (min-width: 750px)": {
+                        columnGap: 'var(--grid-desktop-horizontal-spacing)',
+                        rowGap: 'var(--grid-desktop-vertical-spacing)'
+                    }
+                })}>
+                    <li className={css({
+                        flexBasis: '50%'
+                    })}>
+                        <div className={css({
+                            padding: '2.5rem'
+                        })}>
+                            <h3>Shipping</h3>
+                            <p>Shipping rates are calculated by the size of the package and shipped via Canada Post within 10 business days.</p>
+                        </div>
+                    </li>
+                    <li className={css({
+                        flexBasis: '50%'
+                    })}>
+                        <div className={css({
+                            padding: '2.5rem'
+                        })}>
+                            <h3>Returns</h3>
+                            <p>All artworks can be returned in their original packaging and original condition within 14 days of receipt if it is not to your liking.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </>
     )
 }
