@@ -42,15 +42,18 @@ function Footer() {
                 },
             })}>
                 <div className={css({
-                    display: 'block',
+                    display: 'grid',
                     marginBottom: '2rem',
-                    columnGap: 'var(--grid-mobile-horizontal-spacing)',
+                    gridTemplateColumns: '1fr 1fr',
                     "@media screen and (min-width: 750px)": {
-                        display: 'flex',
+                        gridTemplateColumns: '1fr 1fr 2fr'
                     },
                 })}>
                     <div className={css({
-                        flexBasis: "25%"
+                        gridColumnStart: 1,
+                        gridColumnEnd: 2,
+                        gridRowStart: 1,
+                        gridRowEnd: 2,
                     })}>
                         <h2 className={h2Style}>Shop</h2>
                         <ul className={ulStyle}>
@@ -82,7 +85,10 @@ function Footer() {
                         </ul>
                     </div>
                     <div className={css({
-                        flexBasis: "25%"
+                        gridColumnStart: 2,
+                        gridColumnEnd: 3,
+                        gridRowStart: 1,
+                        gridRowEnd: 2,
                     })}>
                         <h2 className={h2Style}>Info</h2>
                         <ul className={ulStyle}>
@@ -102,7 +108,16 @@ function Footer() {
                         </ul>
                     </div>
                     <div className={css({
-                        flexBasis: "25%"
+                        gridColumnStart: 1,
+                        gridColumnEnd: 3,
+                        gridRowStart: 2,
+                        gridRowEnd: 3,
+                        "@media screen and (min-width: 750px)": {
+                            gridColumnStart: 3,
+                            gridColumnEnd: 5,
+                            gridRowStart: 1,
+                            gridRowEnd: 2,
+                        },
                     })}>
                         <h2 className={h2Style}>Our mission</h2>
                         <p>We curate affordably priced pieces from the most exciting up-and-coming artists.</p>
