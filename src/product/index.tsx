@@ -1,83 +1,196 @@
-import { useState } from "react";
+import { useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { css } from '@emotion/css'
+import Swal from 'sweetalert2'
 
-import "./index.css"
 import productsData from "../data/products";
 import { useCart } from "../hooks/cart";
 
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            "media-gallery": any;
-            "modal-opener": any;
-            "product-form": any;
-        }
-    }
-}
-
 function Product() {
     const [, { addItem }] = useCart();
-    const [showAddedToCartMessage, setShowAddedToCartMessage] = useState(false);
+    const imageWrapperRef = useRef<HTMLDivElement>(null);
+    const imageRef = useRef<HTMLImageElement>(null);
     const { id } = useParams();
-
+    const [imageIndex, setImageIndex] = useState(0);
     const product = productsData.find(p => p.id === id);
     if (!product) throw new Error("Product not found");
 
     const onAddToCartClick = () => {
-        setShowAddedToCartMessage(true);
+        Swal.fire({
+            title: `${product.name} has been added to your cart.`,
+            icon: 'success',
+            confirmButtonColor: '#a2a28a'
+        })
         addItem(product.id);
     }
 
     return (
         <>
-            <section className="shopify-section section">
-                <section className="page-width section-template--15459810574504__main-padding">
-                    <div className="product product--large product--stacked grid grid--1-col grid--2-col-tablet">
-                        <div className="grid__item product__media-wrapper">
-                            <media-gallery role="region" className="product__media-gallery" aria-label="Gallery Viewer" data-desktop-layout="stacked">
-                                <div className="slider-mobile-gutter">
-                                    <ul className="product__media-list grid grid--peek list-unstyled slider slider--mobile">
-                                        {product.images.map((image, index) =>
-                                            <li key={index} className="product__media-item grid__item slider__slide" data-media-id="template--15459810574504__main-24773563875496">
-                                                <div className="product__media media gradient global-media-settings" style={{ paddingTop: "150.00000000000003%" }}>
-                                                    <img src={image} loading="lazy" width="973" height="1460" alt="" />
-                                                </div>
-                                            </li>
-                                        )}
-                                    </ul>
-                                </div>
-                            </media-gallery>
+            <section className={css({
+                paddingTop: '30px',
+                paddingBottom: '0px',
+                maxWidth: 'var(--page-width)',
+                margin: '0 auto',
+                padding: '0 1.5rem',
+                "@media screen and (min-width: 750px)": {
+                    padding: '40px 5rem 0',
+                }
+            })}>
+                <div ref={imageWrapperRef} className={css({
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                })}>
+                    <div className={css({
+                        maxWidth: '100%',
+                        width: '100%',
+                        "@media screen and (min-width: 750px)": {
+                            width: 'calc(50% - var(--grid-desktop-horizontal-spacing) / 2)'
+                        },
+                        "@media screen and (min-width: 990px)": {
+                            maxWidth: '65%',
+                            width: 'calc(65% - var(--grid-desktop-horizontal-spacing)/2)'
+                        }
+                    })}>
+                        <div onMouseMove={(e) => {
+                            if (imageWrapperRef.current && imageRef.current) {
+                                const transformOrigin = ((e.pageX - imageWrapperRef.current.offsetLeft) / imageWrapperRef.current.getBoundingClientRect().width) * 100 + "% " + ((e.pageY - imageWrapperRef.current.offsetTop) / imageWrapperRef.current.getBoundingClientRect().height) * 100 + "%";
+                                imageRef.current.style.transformOrigin = transformOrigin;
+                            }
+                        }} className={css({
+                            width: '100%',
+                            overflow: 'hidden',
+                            borderRadius: '10px',
+                            border: '2px solid var(--color-1)',
+                            cursor: 'zoom-in',
+                        })}>
+                            <img ref={imageRef} src={product.images[imageIndex]} loading="lazy" alt={`${product.name} main`} className={css({
+                                display: 'block',
+                                width: '100%',
+                                ":hover": {
+                                    transition: "transform 0.5s ease-out",
+                                    transform: "scale(1.6)"
+                                }
+                            })} />
                         </div>
-                        <div className="product__info-wrapper grid__item">
-                            <div className="product__info-container product__info-container--sticky">
-                                <h1 className="product__title">
-                                    {product.name}
-                                </h1>
-                                <div className="no-js-hidden" role="status">
-                                    <div className="price price--large price--show-badge">
-                                        <div className="price__container">
-                                            <div className="price__regular">
-                                                <span className="price-item price-item--regular">
-                                                    ${product.price}.00 AUD
-                                                </span>
-                                            </div>
-                                        </div>
+                        <ul className={css({
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            margin: 0,
+                            marginBottom: '2rem',
+                            marginTop: 'var(--grid-mobile-vertical-spacing)',
+                            padding: '0',
+                            listStyle: 'none',
+                            columnGap: 'var(--grid-mobile-horizontal-spacing)',
+                            rowGap: 'var(--grid-mobile-vertical-spacing)',
+                            "@media screen and (min-width: 750px)": {
+                                columnGap: 'var(--grid-desktop-horizontal-spacing)',
+                                rowGap: 'var(--grid-desktop-vertical-spacing)',
+                                marginTop: 'var(--grid-desktop-vertical-spacing)',
+                            }
+                        })}>
+                            {product.images.map((image, index) =>
+                                <li key={index} onClick={() => setImageIndex(index)} className={css({
+                                    width: 'calc((100% - var(--grid-desktop-horizontal-spacing) * 3) / 4)',
+                                })}>
+                                    <div className={css({
+                                        paddingTop: "150%",
+                                        width: '100%',
+                                        position: 'relative',
+                                    })}>
+                                        <img src={image} loading="lazy" className={css({
+                                            display: 'block',
+                                            maxWidth: '100%',
+                                            position: 'absolute',
+                                            top: '0',
+                                            left: '0',
+                                            height: '100%',
+                                            width: '100%',
+                                            cursor: 'pointer',
+                                            borderRadius: '10px',
+                                            border: '2px solid var(--color-1)',
+                                            ...index === imageIndex && { borderColor: "var(--color-3)" }
+                                        })} alt={`${product.name} (${index + 1})`} />
                                     </div>
-                                </div>
-                                {showAddedToCartMessage && <div className="product-form__error-message-wrapper" role="alert">
-                                    <span className="product-form__error-message">{product.name} has been added to your cart.</span>
-                                </div>}
-                                <div className="product-form__buttons">
-                                    <button onClick={onAddToCartClick} type="submit" name="add" className="product-form__submit button button--full-width button--secondary">
-                                        <span>Add to cart</span>
-                                    </button>
-                                </div>
-                                <div className="product__description rte" dangerouslySetInnerHTML={{ __html: product.description }} />
+                                </li>
+                            )}
+                        </ul>
+                    </div>
+                    <div className={css({
+                        maxWidth: '100%',
+                        width: '100%',
+                        paddingLeft: '0',
+                        paddingBottom: '0',
+                        flexGrow: '1',
+                        flexShrink: '0',
+                        "@media screen and (min-width: 750px)": {
+                            width: 'calc(50% - var(--grid-desktop-horizontal-spacing) / 2)',
+                            paddingLeft: '5rem',
+                            maxWidth: 'calc(50% - var(--grid-desktop-horizontal-spacing) / 2)'
+                        },
+                        "@media screen and (min-width: 990px)": {
+                            paddingLeft: '4rem',
+                            maxWidth: '35%',
+                            width: 'calc(35% - var(--grid-desktop-horizontal-spacing) / 2)',
+                        }
+                    })}>
+                        <div className={css({
+                            "@media screen and (min-width: 750px)": {
+                                display: 'block',
+                                position: 'sticky',
+                                top: '3rem',
+                                zIndex: '2',
+                                maxWidth: '60rem'
+                            }
+                        })}>
+                            <h1 className={css({
+                                wordBreak: 'break-word',
+                                marginBottom: '0',
+                                "@media screen and (min-width: 750px)": {
+                                    marginTop: '0'
+                                }
+                            })}>
+                                {product.name}
+                            </h1>
+                            <div className={css({
+                                fontSize: '1.6rem',
+                                lineHeight: 'calc(1 + 0.5 / var(--font-body-scale))',
+                                letterSpacing: '0.13rem',
+                                margin: '1.5rem 0',
+                                "@media screen and (min-width: 750px)": {
+                                    fontSize: '1.8rem',
+                                }
+                            })}>
+                                ${product.price}.00 AUD
                             </div>
+                            <button onClick={onAddToCartClick} type="button" className={css({
+                                margin: '1.5rem 0',
+                                marginBottom: '1rem',
+                                display: 'flex',
+                                width: '100%',
+                                fontSize: '1.5rem',
+                                letterSpacing: '0.1rem',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                border: 0,
+                                cursor: 'pointer',
+                                font: 'inherit',
+                                color: 'var(--color-3)',
+                                backgroundColor: 'var(--color-4)',
+                                minHeight: 'calc(4.5rem + var(--buttons-border-width) * 2)',
+                                borderRadius: 'var(--buttons-radius-outset)',
+                                transition: "transform .5s ease",
+                                ":hover": {
+                                    transform: "scale(1.02)"
+                                }
+                            })}>
+                                <span>Add to cart</span>
+                            </button>
+                            <div className={css({
+                                margin: '2.5rem 0'
+                            })} dangerouslySetInnerHTML={{ __html: product.description }} />
                         </div>
                     </div>
-                </section>
+                </div>
             </section>
             <div className={css({
                 maxWidth: 'var(--page-width)',
