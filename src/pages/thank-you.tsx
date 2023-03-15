@@ -1,7 +1,7 @@
 import { useEffect } from "react";
+import { css } from '@emotion/css'
 
 import { useCart } from "../hooks/cart";
-import "./not-found.css"
 
 function NotFound() {
     const [, { removeItems }] = useCart();
@@ -11,13 +11,20 @@ function NotFound() {
     }, [removeItems]);
 
     return (
-        <div id="shopify-section-template--15459810148520__main" className="shopify-section">
-            <div className="template-404 page-width page-margin center">
-                <h1 className="title">
-                    Thank you for your order.
-                </h1>
-                <p>We are processing your oder. blah blah blah...</p>
-            </div>
+        <div className={css({
+            textAlign: 'center',
+            margin: '7rem auto',
+            maxWidth: 'var(--page-width)',
+        })}>
+            <h1 className={css({
+                margin: '3rem 0 2rem',
+                "@media screen and (min-width: 990px)": {
+                    margin: '5rem 0 3rem'
+                }
+            })}>
+                Thank you for your order.
+            </h1>
+            <p>We are processing your oder. blah blah blah...</p>
         </div>
     );
 }
