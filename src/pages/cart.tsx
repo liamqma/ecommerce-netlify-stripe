@@ -1,24 +1,27 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import classNames from "classnames";
 import axios from 'axios';
 import { css } from '@emotion/css'
 import productsData from "../data/products";
+import ClipLoader from "react-spinners/ClipLoader";
 import { useCart, Item } from "../hooks/cart";
-import "./cart.css"
-
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            "cart-items": any;
-        }
-    }
-}
 
 function CartRow({ item, removeItem, updateItem }: { item: Item, removeItem: (id: Item["id"]) => void, updateItem: (item: Item) => void }) {
     const product = productsData.find(p => p.id === item.id);
     if (!product) return null;
-    return <tr className="cart-item" key={item.id}>
+    return <tr className={css({
+        ":last-child": {
+            marginBottom: '0',
+        },
+        gridGap: '1.5rem',
+        display: 'grid',
+        gap: '1.5rem',
+        gridTemplate: 'repeat(2,auto) /repeat(4,1fr)',
+        marginBottom: '3.5rem',
+        "@media screen and (min-width: 750px)": {
+            display: "table-row"
+        }
+    })} key={item.id}>
         <td className={css({
             padding: '0',
             border: 'none',
@@ -300,20 +303,67 @@ function Cart() {
         });
     }
 
+    if (!items.length) return <div className={css({
+        textAlign: 'center',
+        padding: '3rem',
+        "@media screen and (min-width: 990px)": {
+            padding: '7rem 0',
+        }
+    })}>
+        <h1 className={css({
+            margin: '4.5rem 0 2rem',
+            "@media screen and (min-width: 990px)": {
+                margin: '0 0 3rem',
+            }
+        })}>Your cart is empty</h1>
+        <Link to="/" className={css({
+            color: 'var(--color-1)',
+            textUnderlineOffset: '0.3rem',
+            textDecorationThickness: '0.1rem',
+            transition: 'text-decoration-thickness ease 0.1s'
+        })}>Continue shopping</Link>
+    </div>
+
     return (
         <>
-            <cart-items class={classNames("page-width", "section-template--15459810246824__cart-items-padding", items.length === 0 && "is-empty")}>
-                <div className="title-wrapper-with-link">
-                    <h1 className="title title--primary">Your cart</h1>
-                    <Link to="/" className="underlined-link">Continue shopping</Link>
+            <div className={css({
+                padding: '0 1.5rem',
+                paddingTop: '27px',
+                paddingBottom: '27px',
+                maxWidth: 'var(--page-width)',
+                margin: '0 auto',
+                "@media screen and (min-width: 750px)": {
+                    padding: '0 5rem',
+                    paddingTop: '36px',
+                    paddingBottom: '36px',
+                },
+            })}>
+                <div className={css({
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                    gap: '1rem',
+                    marginBottom: '3rem',
+                    flexWrap: 'wrap',
+                    margin: '3rem 0 2rem',
+                    "@media screen and (min-width: 990px)": {
+                        alignItems: 'center',
+                        margin: '5rem 0 3rem',
+                    }
+                })}>
+                    <h1 className={css({
+                        margin: '0',
+                        lineHeight: 'calc(var(--font-heading-scale) * 3rem)'
+                    })}>Your cart</h1>
+                    <Link to="/" className={css({
+                        color: 'var(--color-1)',
+                        textUnderlineOffset: '0.3rem',
+                        textDecorationThickness: '0.1rem',
+                        transition: 'text-decoration-thickness ease 0.1s'
+                    })}>Continue shopping</Link>
                 </div>
 
-                <div className="cart__warnings">
-                    <h1 className="cart__empty-text">Your cart is empty</h1>
-                    <Link to="/" className="underlined-link">Continue shopping</Link>
-                </div>
-
-                {!!items.length && <div className={css({
+                <div className={css({
                     position: 'relative',
                     paddingBottom: '3rem',
                     borderBottom: '0.1rem solid rgba(var(--color-foreground), 0.08)',
@@ -398,33 +448,101 @@ function Cart() {
                             {items.map(item => <CartRow updateItem={updateItem} removeItem={removeItem} key={item.id} item={item} />)}
                         </tbody>
                     </table>
-                </div>}
-                {loading && <p className="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true" role="status">Loading...</p>}
-            </cart-items>
-            {!!items.length && <div id="shopify-section-template--15459810246824__cart-footer" className="shopify-section cart__footer-wrapper">
-                <div className="page-width" id="main-cart-footer" data-id="template--15459810246824__cart-footer">
-                    <div>
-                        <div className="cart__footer"><div className="cart__blocks">
-
-                            <div className="js-contents">
-                                <div className="totals">
-                                    <h3 className="totals__subtotal">Subtotal</h3>
-                                    <p className="totals__subtotal-value">${totalPrice}.00 AUD</p>
-                                </div>
-                                <small className="tax-note caption-large rte">Taxes and shipping calculated at checkout
-                                </small>
-                            </div>
-                            <div className="cart__ctas">
-                                <button onClick={checkout} disabled={loading} type="submit" id="checkout" className="cart__checkout-button button" name="checkout" form="cart">
-                                    Check out
-                                </button>
-                            </div>
-                            {isError && <div id="cart-errors">Error! Please try again or contact us.</div>}
+                </div>
+            </div>
+            <div className={css({
+                maxWidth: 'var(--page-width)',
+                margin: '0 auto',
+                padding: '0 1.5rem',
+                "@media screen and (min-width: 750px)": {
+                    padding: '0 5rem',
+                }
+            })}>
+                <div className={css({
+                    padding: '4rem 0',
+                    "@media screen and (min-width: 750px)": {
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        border: '0',
+                    }
+                })}>
+                    <div className={css({
+                        marginLeft: 'auto',
+                        width: '35rem',
+                    })}>
+                        <div className={css({
+                            margin: '2.2rem 0 1.6rem auto',
+                            textAlign: 'center',
+                            display: 'block',
+                            fontSize: '2rem',
+                            lineHeight: 'calc(1 + 0.5 / var(--font-body-scale))',
+                            letterSpacing: '0.04rem',
+                            "@media screen and (min-width: 750px)": {
+                                marginBottom: '2.2rem',
+                                textAlign: 'right',
+                            }
+                        })}>
+                            Subtotal: ${totalPrice}.00 AUD
                         </div>
+                        <div className={css({
+                            margin: '2.2rem 0 1.6rem auto',
+                            textAlign: 'center',
+                            display: 'block',
+                            fontSize: '1.3rem',
+                            lineHeight: 'calc(1 + 0.5 / var(--font-body-scale))',
+                            letterSpacing: '0.04rem',
+                            "@media screen and (min-width: 750px)": {
+                                marginBottom: '2.2rem',
+                                textAlign: 'right',
+                            }
+                        })}>Taxes and shipping calculated at checkout
                         </div>
+                        <div className={css({
+                            marginTop: '1rem',
+                        })}>
+                            <button onClick={checkout} disabled={loading} type="button" className={css({
+                                width: '100%',
+                                fontSize: '1.5rem',
+                                letterSpacing: '0.1rem',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                border: 0,
+                                cursor: 'pointer',
+                                font: 'inherit',
+                                color: 'var(--color-3)',
+                                backgroundColor: 'var(--color-4)',
+                                minHeight: 'calc(4.5rem + var(--buttons-border-width) * 2)',
+                                borderRadius: 'var(--buttons-radius-outset)',
+                                transition: "transform .5s ease",
+                                display: 'flex',
+                                ":disabled": {
+                                    cursor: 'not-allowed',
+                                    opacity: '.5'
+                                },
+                                ":hover": {
+                                    transform: "scale(1.02)"
+                                }
+                            })}>
+                                <ClipLoader color="var(--color-3)"
+                                    loading={loading}
+                                    cssOverride={{
+                                        marginRight: '10px'
+                                    }}
+                                    aria-label="Loading Spinner"
+                                    data-testid="loader" />
+                                Check out
+                            </button>
+                        </div>
+                        {isError && <div className={css({
+                            textAlign: 'center',
+                            marginTop: '1rem',
+                            "@media screen and (min-width: 750px)": {
+                                textAlign: 'right',
+                            }
+                        })}>Error! Please try again or contact us.</div>}
                     </div>
                 </div>
-            </div>}
+            </div>
         </>
     );
 }
