@@ -77,14 +77,6 @@ const menu: MenuItem[] = [
     }
 ]
 
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            "details-disclosure": any;
-        }
-    }
-}
-
 const svgStyle = css({
     display: 'block',
     position: 'absolute',
@@ -324,8 +316,10 @@ const Nav = ({ isSticky = false }: { isSticky?: boolean }) => <nav className={cs
     })} >
         {menu.map((menuItem, index) =>
             <li key={index}>
-                {menuItem.children ? <details-disclosure>
-                    <details>
+                {menuItem.children ?
+                    <details className={css({
+                        position: 'relative'
+                    })}>
                         <summary className={css({
                             "details[open]>&": {
                                 textDecoration: 'underline'
@@ -339,7 +333,7 @@ const Nav = ({ isSticky = false }: { isSticky?: boolean }) => <nav className={cs
                             padding: '1.2rem',
                             paddingRight: '2.7rem',
                             textDecoration: 'none',
-                            color: 'rgba(var(--color-foreground),.75)',
+                            color: 'var(--color-1)',
                             cursor: 'pointer',
                             border: 'none',
                             boxShadow: 'none',
@@ -408,7 +402,7 @@ const Nav = ({ isSticky = false }: { isSticky?: boolean }) => <nav className={cs
                                 </li>)}
                         </ul>
                     </details>
-                </details-disclosure> :
+                    :
                     <a href={menuItem.href} className={css({
                         display: 'flex',
                         alignItems: 'center',
