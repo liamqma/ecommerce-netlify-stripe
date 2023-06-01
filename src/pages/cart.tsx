@@ -78,7 +78,7 @@ function CartRow({ item, removeItem, updateItem }: { item: Item, removeItem: (id
                     textDecorationThickness: '.2rem',
                     textUnderlineOffset: '.3rem'
                 }
-            })}>eleven vessels 2</Link>
+            })}>{product.name}</Link>
             <div className={css({
                 color: 'var(--color-1)',
                 fontSize: '1.4rem',

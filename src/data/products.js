@@ -6,12 +6,12 @@ import img5 from './know-the-rose_dried-flowers-australia_Mountain_Dasy_Mini_02_
 import img6 from './know-the-rose_dried-flowers-australia_Mountain_Dasy_Mini_04_1296x.webp';
 
 const products = [
-    {
-        id: "prod_NKYo1Bq0U8odob",
-        name: "Flower Plant",
-        price: 199,
-        images: [img1, img2, img3, img4, img5, img6],
-        description: `<p><strong>Details</strong></p>
+  {
+    id: 'prod_NKYo1Bq0U8odob',
+    name: 'Flower Plant',
+    price: 199,
+    images: [img1, img2, img3, img4, img5, img6],
+    description: `<p><strong>Details</strong></p>
         <ul>
             <li>Original artwork, 2021</li>
             <li>Gouache&nbsp;on paper&nbsp;with deckled edge</li>
@@ -26,14 +26,14 @@ const products = [
         <strong>Authenticity</strong>
         <ul>
             <li>Artwork&nbsp;is signed by the artist Leia Bryans&nbsp;</li>
-        </ul>`
-    },
-    {
-        id: "prod_NHwdaXbjj6lgW5",
-        name: "Everlasting Luna Bouquet",
-        price: 99,
-        images: [img1, img2, img3, img4, img5, img6],
-        description: `<p><strong>Details</strong></p>
+        </ul>`,
+  },
+  {
+    id: 'prod_NHwdaXbjj6lgW5',
+    name: 'Everlasting Luna Bouquet',
+    price: 99,
+    images: [img1, img2, img3, img4, img5, img6],
+    description: `<p><strong>Details</strong></p>
         <ul>
             <li>Original artwork, 2021</li>
             <li>Gouache&nbsp;on paper&nbsp;with deckled edge</li>
@@ -48,10 +48,10 @@ const products = [
         <strong>Authenticity</strong>
         <ul>
             <li>Artwork&nbsp;is signed by the artist Leia Bryans&nbsp;</li>
-        </ul>`
-    },
-]
+        </ul>`,
+  },
+];
 
-const p = [...products, ...products, ...products, ...products, products[1]];
+const p = [...products];
 
 export default p;

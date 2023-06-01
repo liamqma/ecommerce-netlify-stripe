@@ -41,7 +41,11 @@ const removeItem = (id: Item["id"]): Action<State> => ({ setState, getState }) =
 
 const updateItem = ({ qty, id }: Item): Action<State> => ({ setState, getState }) => {
     const { items } = getState();
-    setState({ items: [...items.filter(item => item.id !== id), ...qty > 0 ? [{ qty, id }] : []] });
+    if (qty <= 0) {
+        setState({ items: items.filter(item => item.id !== id) });
+    } else {
+        setState({ items: items.map(item => item.id === id ? { qty, id } : item) });
+    }
 }
 
 const removeItems = (): Action<State> => ({ setState, getState }) => {
