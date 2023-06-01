@@ -280,7 +280,7 @@ const Logo = () => <h1 className={css({
     lineHeight: '0',
 })}>
     <Link to="/" className={css({
-        fontSize: '40px',
+        fontSize: '32px',
         lineHeight: '40px',
         paddingTop: '20px',
         letterSpacing: '5px',
@@ -289,6 +289,9 @@ const Logo = () => <h1 className={css({
         textDecoration: 'none',
         wordBreak: 'break-word',
         color: 'var(--color-1)',
+        "@media screen and (min-width: 750px)": {
+            fontSize: '40px',
+        }
     })}>
         MYSA & CO.
     </Link>
