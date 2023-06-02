@@ -1,12 +1,12 @@
 import { Handler } from '@netlify/functions';
-
-const DEPLOY_PRIME_URL = process.env.DEPLOY_PRIME_URL;
+import { parse } from 'url';
 
 export const handler: Handler = async (event, context) => {
+  const url = parse(event.rawUrl);
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: `Hello, ${DEPLOY_PRIME_URL}!`,
+      message: `${url.protocol}//${url.host}`,
     }),
   };
 };
