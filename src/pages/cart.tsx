@@ -89,7 +89,7 @@ function CartRow({ item, removeItem, updateItem }: { item: CartItem, removeItem:
                 marginTop: '0.6rem',
                 maxWidth: '30rem'
             })}>
-                ${price.unit_amount}
+                ${price.unit_amount.toFixed(2)}
             </div>
         </td>
         <td className={css({
@@ -280,7 +280,7 @@ function CartRow({ item, removeItem, updateItem }: { item: CartItem, removeItem:
                     marginBottom: '0',
                 }
             })}>
-                ${price.unit_amount * item.qty}.00
+                ${(price.unit_amount * item.qty).toFixed(2)}
             </span>
         </td>
     </tr>
@@ -485,7 +485,7 @@ function Cart() {
                                 textAlign: 'right',
                             }
                         })}>
-                            Subtotal: ${totalPrice}.00 AUD
+                            Subtotal: ${totalPrice.toFixed(2)} AUD
                         </div>
                         <div className={css({
                             margin: '2.2rem 0 1.6rem auto',

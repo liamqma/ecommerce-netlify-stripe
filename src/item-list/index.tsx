@@ -169,7 +169,7 @@ function ItemList({ items }: { items: Item[] }) {
                                                     display: 'inline-block',
                                                     verticalAlign: 'top'
                                                 })}>
-                                                    ${item.price}.00 AUD
+                                                    ${item.price.toFixed(2)} AUD
                                                 </span>
                                             </div>}
                                     </div>

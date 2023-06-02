@@ -167,7 +167,7 @@ function Product() {
                                     fontSize: '1.8rem',
                                 }
                             })}>
-                                ${price.unit_amount} AUD
+                                ${price.unit_amount.toFixed(2)} AUD
                             </div>
                             {product.prices.length > 1 &&
                                 <select defaultValue={selectedPriceId} onChange={(event) => onSelectPrice(event.target.value)} className={css({
@@ -183,7 +183,7 @@ function Product() {
                                     backgroundSize: '5px 5px, 5px 5px, 2.5em 3.5em',
                                     backgroundRepeat: 'no-repeat',
                                 })}>
-                                    {product.prices.map((price) => <option value={price.id} key={price.id}>{price.nickname || price.unit_amount}</option>)}
+                                    {product.prices.map((price) => <option value={price.id} key={price.id}>{price.nickname || price.unit_amount.toFixed(2)}</option>)}
                                 </select>
                             }
                             <button onClick={onAddToCartClick} type="button" className={css({
