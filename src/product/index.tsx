@@ -61,13 +61,12 @@ function Product() {
                             overflow: 'hidden',
                             borderRadius: '10px',
                             border: '2px solid var(--color-1)',
-                            cursor: 'zoom-in',
                         })}>
                             <img ref={imageRef} src={product.images[imageIndex]} loading="lazy" alt={`${product.name} main`} className={css({
                                 display: 'block',
                                 width: '100%',
+                                transition: "transform 0.5s ease-out 0.2s",
                                 ":hover": {
-                                    transition: "transform 0.5s ease-out",
                                     transform: "scale(1.6)"
                                 }
                             })} />
