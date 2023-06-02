@@ -13,7 +13,11 @@ function Product() {
     const { id } = useParams();
     const [imageIndex, setImageIndex] = useState(0);
     const product = productsData.find(p => p.id === id);
+    const [selectedPriceId, setSelectedPriceId] = useState(product?.prices[0].id);
     if (!product) throw new Error("Product not found");
+
+    const price = product.prices.find(p => p.id === selectedPriceId);
+    if (!price || !selectedPriceId) throw new Error("Price not found");
 
     const onAddToCartClick = () => {
         Swal.fire({
@@ -21,7 +25,11 @@ function Product() {
             icon: 'success',
             confirmButtonColor: '#a2a28a'
         })
-        addItem(product.id);
+        addItem(selectedPriceId);
+    }
+
+    const onSelectPrice = (priceId: string) => {
+        setSelectedPriceId(priceId);
     }
 
     return (
@@ -159,8 +167,25 @@ function Product() {
                                     fontSize: '1.8rem',
                                 }
                             })}>
-                                ${product.price}.00 AUD
+                                ${price.unit_amount} AUD
                             </div>
+                            {product.prices.length > 1 &&
+                                <select defaultValue={selectedPriceId} onChange={(event) => onSelectPrice(event.target.value)} className={css({
+                                    width: '100%',
+                                    borderRadius: '40px',
+                                    padding: '1.6rem 2rem',
+                                    fontSize: '1.4rem',
+                                    appearance: 'none',
+                                    color: 'var(--color-1)',
+                                    border: 0,
+                                    backgroundImage: 'linear-gradient(45deg, transparent 50%, var(--color-3) 50%), linear-gradient(135deg, var(--color-3) 50%, transparent 50%), linear-gradient(to right, var(--color-4), var(--color-4))',
+                                    backgroundPosition: 'calc(100% - 20px) calc(1.5em + 2px), calc(100% - 15px) calc(1.5em + 2px),100% 0',
+                                    backgroundSize: '5px 5px, 5px 5px, 2.5em 3.5em',
+                                    backgroundRepeat: 'no-repeat',
+                                })}>
+                                    {product.prices.map((price) => <option value={price.id} key={price.id}>{price.nickname || price.unit_amount}</option>)}
+                                </select>
+                            }
                             <button onClick={onAddToCartClick} type="button" className={css({
                                 margin: '1.5rem 0',
                                 marginBottom: '1rem',

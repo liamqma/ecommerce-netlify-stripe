@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { css } from '@emotion/css'
-import productsData from "../data/products";
+import { findPrice } from "../data/products";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useCart, Item } from "../hooks/cart";
+import { useCart, CartItem } from "../hooks/cart";
 
-function CartRow({ item, removeItem, updateItem }: { item: Item, removeItem: (id: Item["id"]) => void, updateItem: (item: Item) => void }) {
-    const product = productsData.find(p => p.id === item.id);
-    if (!product) return null;
+function CartRow({ item, removeItem, updateItem }: { item: CartItem, removeItem: (id: CartItem["id"]) => void, updateItem: (item: CartItem) => void }) {
+    const { product, price } = findPrice(item.id);
+    if (!product || !price) return null;
     return <tr className={css({
         ":last-child": {
             marginBottom: '0',
@@ -66,7 +66,7 @@ function CartRow({ item, removeItem, updateItem }: { item: Item, removeItem: (id
                 width: '50rem',
             }
         })}>
-            <Link to={`/products/${item.id}`} className={css({
+            <Link to={`/products/${product.id}`} className={css({
                 color: 'var(--color-1)',
                 textDecoration: 'none',
                 display: 'block',
@@ -79,6 +79,7 @@ function CartRow({ item, removeItem, updateItem }: { item: Item, removeItem: (id
                     textUnderlineOffset: '.3rem'
                 }
             })}>{product.name}</Link>
+            {product.prices.length > 1 && <span className={css({ fontSize: '1.2rem' })}>{price.nickname}</span>}
             <div className={css({
                 color: 'var(--color-1)',
                 fontSize: '1.4rem',
@@ -88,7 +89,7 @@ function CartRow({ item, removeItem, updateItem }: { item: Item, removeItem: (id
                 marginTop: '0.6rem',
                 maxWidth: '30rem'
             })}>
-                ${product.price}.00
+                ${price.unit_amount}
             </div>
         </td>
         <td className={css({
@@ -279,7 +280,7 @@ function CartRow({ item, removeItem, updateItem }: { item: Item, removeItem: (id
                     marginBottom: '0',
                 }
             })}>
-                ${product.price * item.qty}.00
+                ${price.unit_amount * item.qty}.00
             </span>
         </td>
     </tr>
@@ -289,7 +290,9 @@ function Cart() {
     const [{ items }, { updateItem, removeItem }] = useCart();
     const [loading, setLoading] = useState(false);
     const [isError, setIsError] = useState(false)
-    const totalPrice = items.reduce((total, item) => total + (productsData.find(p => p.id === item.id)?.price || 0) * item.qty, 0);
+    const totalPrice = items.reduce((total, item) =>
+        total + (findPrice(item.id).price?.unit_amount || 0) * item.qty, 0
+    );
 
     const checkout = async () => {
         setLoading(true);

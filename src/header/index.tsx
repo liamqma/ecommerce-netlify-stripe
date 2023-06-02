@@ -2,7 +2,7 @@ import { useState, useEffect, MouseEventHandler } from "react";
 import { css } from '@emotion/css'
 import { Link } from "react-router-dom";
 
-import { useCart, Item } from "../hooks/cart";
+import { useCart, CartItem } from "../hooks/cart";
 import { useIsHome } from '../hooks/is-home';
 import { IconArrow } from "../icons/arrow";
 
@@ -427,7 +427,7 @@ const Nav = ({ isSticky = false }: { isSticky?: boolean }) => <nav className={cs
     </ul>
 </nav>
 
-const HeaderIcons = ({ items }: { items: Item[] }) =>
+const HeaderIcons = ({ items }: { items: CartItem[] }) =>
     <div className={css({
         display: 'flex',
         gridArea: 'icons',

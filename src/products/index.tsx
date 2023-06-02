@@ -5,7 +5,8 @@ import productsData from "../data/products";
 const items = productsData.map(item => ({
     ...item,
     image: item.images[0],
-    href: `/products/${item.id}`
+    href: `/products/${item.id}`,
+    price: item.prices[0].unit_amount,
 }))
 
 function Products() {

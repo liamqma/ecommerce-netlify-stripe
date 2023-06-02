@@ -1,13 +1,13 @@
 import { createStore, createHook, createSubscriber, Action } from 'react-sweet-state';
 import Cookies from 'js-cookie'
 
-export type Item = {
-    id: string;
+export type CartItem = {
+    id: string; // price_id
     qty: number;
 };
 
 type State = {
-    items: Item[];
+    items: CartItem[];
 }
 
 const itemsFromCookie = Cookies.get("items");
@@ -17,7 +17,7 @@ const initialState: State = {
 };
 
 
-const addItem = (id: Item["id"]): Action<State> =>
+const addItem = (id: CartItem["id"]): Action<State> =>
     ({ setState, getState }) => {
         const { items } = getState();
         if (items.find(item => item.id === id)) {
@@ -34,12 +34,12 @@ const addItem = (id: Item["id"]): Action<State> =>
         }
     };
 
-const removeItem = (id: Item["id"]): Action<State> => ({ setState, getState }) => {
+const removeItem = (id: CartItem["id"]): Action<State> => ({ setState, getState }) => {
     const { items } = getState();
     setState({ items: items.filter(item => item.id !== id) });
 };
 
-const updateItem = ({ qty, id }: Item): Action<State> => ({ setState, getState }) => {
+const updateItem = ({ qty, id }: CartItem): Action<State> => ({ setState, getState }) => {
     const { items } = getState();
     if (qty <= 0) {
         setState({ items: items.filter(item => item.id !== id) });
