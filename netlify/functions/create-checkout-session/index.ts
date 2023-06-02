@@ -29,6 +29,14 @@ export const handler: Handler = async (event) => {
     success_url: `${URL}/thank-you?success=true`,
     cancel_url: `${URL}/cart?canceled=true`,
     shipping_address_collection: { allowed_countries: ['AU'] },
+    shipping_options: [
+      {
+        shipping_rate: 'shr_1Ma4w7Bx9e7RzSyHktl5Z9Vv',
+      },
+      {
+        shipping_rate: 'shr_1NEUWiBx9e7RzSyH5Wlntv7V',
+      },
+    ],
   });
 
   return {
