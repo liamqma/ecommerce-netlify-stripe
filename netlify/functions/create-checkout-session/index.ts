@@ -20,6 +20,7 @@ export const handler: Handler = async (event) => {
     return {
       price: item.id,
       quantity: item.qty,
+      tax_rates: ['txr_1NEUZjBx9e7RzSyHu7yTIl66'],
     };
   });
 
@@ -37,6 +38,9 @@ export const handler: Handler = async (event) => {
         shipping_rate: 'shr_1NEUWiBx9e7RzSyH5Wlntv7V',
       },
     ],
+    automatic_tax: {
+      enabled: false,
+    },
   });
 
   return {
